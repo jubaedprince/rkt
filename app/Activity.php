@@ -11,6 +11,18 @@ class Activity extends Model
     protected $fillable = ['date', 'car_id', 'comment'];
 
     public function car(){
-        return $this->hasOne('App\Car');
+        return $this->belongsTo('App\Car');
+    }
+
+    public function maintenance(){
+        return $this->hasOne('App\Maintenance');
+    }
+
+    public function nil(){
+        return $this->hasOne('App\Nil');
+    }
+
+    public function onday(){
+        return $this->hasOne('App\Onday');
     }
 }

@@ -11,6 +11,6 @@ class Car extends Model
     protected $fillable = ['name'];
 
     public function activity(){
-        return $this->belongsTo('App\User');
+        return $this->hasOne('App\Activity');
     }
 }

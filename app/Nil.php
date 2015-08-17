@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nil extends Model
 {
-    protected $table = 'customers';
+    protected $table = 'nils';
 
     protected $fillable = ['cost', 'activity_id'];
 
     public function activity(){
-        return $this->hasOne('App\Activity');
+        return $this->belongsTo('App\Activity');
     }
 }

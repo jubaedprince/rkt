@@ -18,7 +18,7 @@ class CreateActivitiesTable extends Migration
             $table->date('date');
             $table->text('comment');
             $table->timestamps();
-            $table->foreign('car_id')->references('id')->on('cars');
+        //    $table->foreign('car_id')->references('id')->on('cars');
         });
     }
 

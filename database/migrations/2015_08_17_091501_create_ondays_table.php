@@ -24,10 +24,10 @@ class CreateOndaysTable extends Migration
             $table->integer('fare');
             $table->integer('market_price');
 
-            $table->foreign('activity_id')->references('id')->on('activities');
-            $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('location_id_origin')->references('id')->on('locations');
-            $table->foreign('location_id_destination')->references('id')->on('locations');
+//            $table->foreign('activity_id')->references('id')->on('activities');
+//            $table->foreign('customer_id')->references('id')->on('customers');
+//            $table->foreign('location_id_origin')->references('id')->on('locations');
+//            $table->foreign('location_id_destination')->references('id')->on('locations');
         });
     }
 

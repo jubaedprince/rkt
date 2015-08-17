@@ -8,14 +8,14 @@ class Maintenance extends Model
 {
     protected $table = 'maintenances';
 
-    protected $fillable = ['amount'];
+    protected $fillable = ['activity_id'];
 
-    public function item(){
-        return $this->hasMany('App\Item');
+    public function items(){
+        return $this->belongsToMany('App\Item')->withPivot('cost');
     }
 
     public function activity(){
-        return $this->hasOne('App\Activity');
+        return $this->belongsTo('App\Activity');
     }
 
 }

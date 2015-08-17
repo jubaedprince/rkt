@@ -10,7 +10,8 @@ class Item extends Model
 
     protected $fillable = ['name'];
 
-    public function maintenance(){
-        return $this->belongsTo('App\Maintenance');
+    public function maintenances(){
+        return $this->belongsToMany('App\Maintenance')->withPivot('cost');
     }
+
 }

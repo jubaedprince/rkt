@@ -15,12 +15,10 @@ class CreateMaintenancesTable extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('activity_id');
-            $table->integer('item_id');
-            $table->integer('amount');
             $table->timestamps();
 
-            $table->foreign('activity_id')->references('id')->on('activities');
-            $table->foreign('item_id')->references('id')->on('items');
+         //   $table->foreign('activity_id')->references('id')->on('activities');
+
         });
     }
 
