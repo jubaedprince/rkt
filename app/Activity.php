@@ -10,6 +10,8 @@ class Activity extends Model
 
     protected $fillable = ['date', 'car_id', 'comment'];
 
+    protected $appends = ['type', 'cost', 'fare'];
+
     public function car(){
         return $this->belongsTo('App\Car');
     }
@@ -25,4 +27,50 @@ class Activity extends Model
     public function onday(){
         return $this->hasOne('App\Onday');
     }
+
+    public function getTypeAttribute()
+    {
+        if ($this->onday){
+            return "On Day";
+        }
+        else if ($this->maintenance){
+            return "Maintenance";
+        }
+
+        else if ($this->nil){
+            return "Nil";
+        }
+        else return "";
+    }
+
+    public function getCostAttribute()
+    {
+        if ($this->onday){
+            return $this->onday->cost;
+        }
+        else if ($this->maintenance){
+            return $this->maintenance->cost;
+        }
+
+        else if ($this->nil){
+            return $this->nil->cost;
+        }
+        else return "";
+    }
+
+    public function getFareAttribute()
+    {
+        if ($this->onday){
+            return $this->onday->fare;
+        }
+        else if ($this->maintenance){
+            return '0';
+        }
+
+        else if ($this->nil){
+            return '0';
+        }
+        else return "";
+    }
+
 }

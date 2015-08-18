@@ -1,17 +1,17 @@
 <?php
-
-namespace App;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Item extends Model
-{
-    protected $table = 'items';
-
-    protected $fillable = ['name'];
-
-    public function maintenances(){
-        return $this->belongsToMany('App\Maintenance')->withPivot('cost');
-    }
-
-}
+//
+//namespace App;
+//
+//use Illuminate\Database\Eloquent\Model;
+//
+//class Item extends Model
+//{
+//    protected $table = 'items';
+//
+//    protected $fillable = ['name'];
+//
+//    public function maintenances(){
+//        return $this->belongsToMany('App\Maintenance')->withPivot('cost');
+//    }
+//
+//}

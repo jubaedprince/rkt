@@ -19,7 +19,25 @@ use App\Car;
 use App\Nil;
 use App\Onday;
 use App\Location;
+
+// Authentication routes...
+Route::get('/', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
 Route::get('/test/', function () {
+
+    $activity = Activity::findOrFail(48);
+    return $activity;
+
+    $activities = App\Activity::orderBy('created_at', 'desc')->take(10)->get();
+    return $activities;
+
 //    insert activity
 //    $activity = new Activity;
 //    $activity->car_id = 1;
@@ -48,8 +66,8 @@ Route::get('/test/', function () {
 //
 
 //
-//    $activity = Activity::findOrFail(1);
-//    return $activity->car->name;
+//    $activity = Activity::findOrFail(45);
+//    return $activity->getType;
 //    dd($activity);
 
 //    $car = Car::findOrFail(1);
@@ -58,7 +76,50 @@ Route::get('/test/', function () {
 //    return $car->activity->comment;
 //    dd($car->activity);
 });
-Route::get('/home', [
-    'as' => 'home', 'uses' => 'HomeController@showHome'
-]);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [
+        'as' => 'home', 'uses' => 'HomeController@showHome'
+    ]);
+
+    Route::post('/process', [
+        'as' => 'process', 'uses' => 'HomeController@processForm'
+    ]);
+
+    Route::post('/process/onday', [
+        'as' => 'process.onday', 'uses' => 'HomeController@processOndayForm'
+    ]);
+
+    Route::get('/process/onday', [
+        'as' => 'process.ondayForm', 'uses' => 'HomeController@processOndayFormView'
+    ]);
+
+    Route::post('/process/nil', [
+        'as' => 'process.nil', 'uses' => 'HomeController@processNilForm'
+    ]);
+
+    Route::get('/process/nil', [
+        'as' => 'process.nilForm', 'uses' => 'HomeController@processNilFormView'
+    ]);
+
+    Route::post('/process/maintenance', [
+        'as' => 'process.maintenance', 'uses' => 'HomeController@processMaintenanceForm'
+    ]);
+
+    Route::get('/process/maintenance', [
+        'as' => 'process.maintenanceForm', 'uses' => 'HomeController@processMaintenanceFormView'
+    ]);
+
+    //report
+
+    Route::get('/report', [
+        'as' => 'report', 'uses' => 'ReportController@index'
+    ]);
+
+
+
+    //Route::post('/process/maintenance/item', [
+    //    'as' => 'process.maintenance.item', 'uses' => 'HomeController@addItem'
+    //]);
+});
 Route::resource('activity', 'ActivityController');

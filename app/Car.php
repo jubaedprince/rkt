@@ -13,4 +13,6 @@ class Car extends Model
     public function activity(){
         return $this->hasOne('App\Activity');
     }
+
+    //public function lists()
 }

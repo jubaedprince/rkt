@@ -5,12 +5,17 @@
 </head>
 <body>
 @section('sidebar')
-    This is the master sidebar.
+    <br>
+    <div class="col-md-4 col-md-offset-1">
+    <a href="/home" class="btn btn-default" role="button">Home</a>
+    <a href="/report" class="btn btn-default" role="button">Report</a>
+        <br>
+        <br>
+    </div>
 @show
 
 <div class="container">
     @yield('content')
-    @include('forms.activity')
 </div>
 </body>
 </html>
