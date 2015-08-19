@@ -5,6 +5,7 @@
 </head>
 <body>
 @section('sidebar')
+    @if()
     <br>
     <div class="col-md-4 col-md-offset-1">
     <a href="/home" class="btn btn-default" role="button">Home</a>
