@@ -10,7 +10,7 @@
 {{--@endsection--}}
 
 @section('content')
-    {{--<p>This is my home content.</p>--}}
+    <p>This is my home content.</p>
     {{--<p>Route name: {!!Route::currentRouteName()!!}</p>--}}
     <p>{!!Auth::user()->name!!}, <a href="/auth/logout">Logout</a></p>
     @if (Route::currentRouteName() === 'home')
