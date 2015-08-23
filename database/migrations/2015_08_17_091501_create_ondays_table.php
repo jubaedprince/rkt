@@ -15,7 +15,7 @@ class CreateOndaysTable extends Migration
         Schema::create('ondays', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->boolean('type'); //1 import 0 export
+            $table->integer('type'); //1 import 0 export 2 other
             $table->integer('activity_id');
             $table->integer('customer_id');
             $table->integer('location_id_origin');

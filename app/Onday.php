@@ -15,7 +15,7 @@ class Onday extends Model
     }
 
     public function customer(){
-        return $this->belongsTo('App\Customer');
+        return $this->belongsTo('App\Customer', 'customer_id');
     }
 
     public function location_origin(){

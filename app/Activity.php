@@ -8,9 +8,11 @@ class Activity extends Model
 {
     protected $table = 'activities';
 
-    protected $fillable = ['date', 'car_id', 'comment'];
+    protected $fillable = ['car_id', 'comment'];
 
-    protected $appends = ['type', 'cost', 'fare'];
+    protected $appends = ['type', 'cost', 'fare', 'market_price'];
+
+    protected $dates = ['date'];
 
     public function car(){
         return $this->belongsTo('App\Car');
@@ -69,6 +71,21 @@ class Activity extends Model
 
         else if ($this->nil){
             return '0';
+        }
+        else return "";
+    }
+
+    public function getMarketPriceAttribute()
+    {
+        if ($this->onday){
+            return $this->onday->market_price;
+        }
+        else if ($this->maintenance){
+            return 0;
+        }
+
+        else if ($this->nil){
+            return 0;
         }
         else return "";
     }

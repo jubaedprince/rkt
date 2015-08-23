@@ -19,7 +19,7 @@ use App\Car;
 use App\Nil;
 use App\Onday;
 use App\Location;
-
+use Carbon\Carbon;
 // Authentication routes...
 Route::get('/', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -31,12 +31,17 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 Route::get('/test/', function () {
-
-    $activity = Activity::findOrFail(48);
-    return $activity;
-
-    $activities = App\Activity::orderBy('created_at', 'desc')->take(10)->get();
-    return $activities;
+    $a = array();
+    $a = ['a'=>'', 'b'=>''];
+    $a['a']= 'tomar';
+    print_r($a);
+//
+//    $activity = App\Activity::findOrFail(46);
+//    $onday = $activity->onday;
+//     dd($activity->date->format('d/m/Y') );
+//
+//    $activities = App\Activity::orderBy('created_at', 'desc')->take(10)->get();
+//    return $activities;
 
 //    insert activity
 //    $activity = new Activity;
@@ -121,6 +126,12 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
 
+    Route::get('activity/{id}/delete', [
+        'as' => 'activity.delete', 'uses' => 'ActivityController@destroy'
+    ]);
+
+    Route::resource('activity', 'ActivityController', ['only', ['edit', 'update']]);
+
 
 
 
@@ -128,4 +139,4 @@ Route::group(['middleware' => 'auth'], function () {
     //    'as' => 'process.maintenance.item', 'uses' => 'HomeController@addItem'
     //]);
 });
-Route::resource('activity', 'ActivityController');
+//

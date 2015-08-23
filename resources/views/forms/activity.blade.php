@@ -13,7 +13,7 @@
     @endif
 
     <div class="form-group">
-        {!! Form::label('car', 'Truck') !!}
+        {!! Form::label('car', 'Car') !!}
         {!! Form::select('car', $cars, null, array('class' => 'form-control')) !!}
     </div>
 
@@ -21,6 +21,8 @@
         {!! Form::label('date', 'Date') !!}
         {!! Form::input('date', 'date', Carbon\Carbon::now()->format('Y-m-d') , array('class' => 'form-control')) !!}
     </div>
+
+
 
     <div class="form-group">
         {!! Form::label('type', 'Type') !!}
@@ -31,3 +33,11 @@
 
         {!! Form::close() !!}
 </div>
+
+<script>
+    $('#sandbox-container .input-append.date').datepicker({
+        format: "dd/mm/yyyy",
+        clearBtn: true,
+        todayHighlight: true
+    });
+</script>

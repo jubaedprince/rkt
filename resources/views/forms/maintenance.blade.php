@@ -2,7 +2,7 @@
 
     <h1>Maintenance Form</h1>
     Car Name: {!! $activity->car->name !!} <br>
-    Date: {!! $activity->date !!}
+    Date: {!! $activity->date->format('d-M-y') !!}
     {!! Form::open(array('url' => 'process/maintenance', 'method' => 'post')) !!}
     @if (count($errors) > 0)
         <div class="alert alert-danger">

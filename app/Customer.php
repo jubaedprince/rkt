@@ -11,6 +11,6 @@ class Customer extends Model
     protected $fillable = ['name'];
 
     public function onday(){
-        return $this->belongsTo('App\Onday');
+        return $this->hasMany('App\Onday', 'customer_id');
     }
 }

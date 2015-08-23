@@ -49,7 +49,7 @@ class HomeController extends Controller {
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
 
         Session::put('activity', $activity);
-        //todo:flash session later
+
         if ($type == '1'){
             return redirect()->route('process.ondayForm');
         }
@@ -79,7 +79,7 @@ class HomeController extends Controller {
         $customers = Customer::lists('name', 'id');
         $locations = Location::lists('name', 'id');
         $activity = Session::get('activity');
-
+       // Session::forget('activity');
         return view('home', [ 'type'=> '1','activity' => $activity, 'customers' => $customers, 'locations' => $locations, 'activities' => $activities]);
     }
 
@@ -95,6 +95,7 @@ class HomeController extends Controller {
         $onday->type = $request->input('type');
         $onday->activity_id = $request->input('activity_id');
         $onday->location_id_origin = $request->input('location_id_origin');
+        $onday->customer_id = $request->input('customer');
         $onday->location_id_destination = $request->input('location_id_destination');
         $onday->cost = $request->input('cost');
         $onday->fare = $request->input('fare');
@@ -123,6 +124,7 @@ class HomeController extends Controller {
 
     public function processNilFormView(){
         $activity = Session::get('activity');
+       // Session::forget('activity');
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
         return view('home', [ 'type'=> '3', 'activity' => $activity, 'activities' => $activities]);
     }
@@ -141,6 +143,7 @@ class HomeController extends Controller {
     }
     public function processMaintenanceFormView(){
         $activity = Session::get('activity');
+       // Session::forget('activity');
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
         return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities]);
     }
