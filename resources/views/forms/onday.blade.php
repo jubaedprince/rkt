@@ -31,7 +31,7 @@
     <div class="form-group">
         {!! Form::label('type', 'Type', ['class'=> 'col-sm-2 control-label']) !!}
         <div class="col-sm-11">
-            {!! Form::select('type', ['1'=>'Import' , '0' => 'Export', '2' => 'Other'], null, array('class' => 'form-control')) !!}
+            {!! Form::select('type', ['1'=>'Import' , '0' => 'Export', '2' => 'Other'], null, array('class' => 'form-control', 'autofocus'=>'autofocus')) !!}
         </div>
     </div>
 

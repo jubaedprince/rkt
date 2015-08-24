@@ -44,7 +44,6 @@
                 scaleStepWidth : 5000,
                 scaleStartValue : 0,
 
-
             });
         })();
     </script>
