@@ -10,6 +10,7 @@
     <div class="col-md-4 col-md-offset-1">
     <a href="/home" class="btn btn-default" role="button">Home</a>
     <a href="/report" class="btn btn-default" role="button">Report</a>
+        <a href="/car-status" class="btn btn-default" role="button">Car Status</a>
         <br>
         <br>
     </div>
