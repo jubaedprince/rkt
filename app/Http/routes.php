@@ -144,14 +144,28 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     //report
+    Route::group(['prefix' => 'report'], function () {
 
-    Route::post('/report', [
-        'as' => 'report', 'uses' => 'ReportController@index'
-    ]);
+        Route::post('/price-comparison', [
+            'as' => 'price-comparison', 'uses' => 'ReportController@processPriceComparison'
+        ]);
 
-    Route::get('/report', [
-        'as' => 'report', 'uses' => 'ReportController@generateReportForm'
-    ]);
+        Route::get('/price-comparison', [
+            'as' => 'price-comparison', 'uses' => 'ReportController@priceComparison'
+        ]);
+
+        Route::post('/monthly-cost-revenue', [
+            'as' => 'monthly-cost-revenue', 'uses' => 'ReportController@processMonthlyCostRevenue'
+        ]);
+
+        Route::get('/monthly-cost-revenue', [
+            'as' => 'monthly-cost-revenue', 'uses' => 'ReportController@monthlyCostRevenue'
+        ]);
+    });
+
+
+
+
 
 
     Route::get('activity/{id}/delete', [

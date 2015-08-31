@@ -33,11 +33,3 @@
 
         {!! Form::close() !!}
 </div>
-
-<script>
-    $('#sandbox-container .input-append.date').datepicker({
-        format: "dd/mm/yyyy",
-        clearBtn: true,
-        todayHighlight: true
-    });
-</script>

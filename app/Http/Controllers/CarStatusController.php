@@ -8,14 +8,14 @@
 
 namespace App\Http\Controllers;
 use GuzzleHttp;
-
+use URL;
 class CarStatusController extends Controller{
     public function index(){
         $client = new GuzzleHttp\Client([
             // Base URI is used with relative requests
             'base_uri' => 'http://vts.m2mbd.com',
             // You can set any number of default request options.
-            'timeout'  => 2.0,
+            'timeout'  => 5.0,
             'cookies' => true
         ]);
 
@@ -31,6 +31,11 @@ class CarStatusController extends Controller{
         $response = $client->get('http://vts.m2mbd.com/group/vehicle_state.php');
         $code = $response->getStatusCode();
         $body = $response->getBody();
+        $body = (string)$body;
+
+        $body= str_replace('"../images/car/stopcarimage.png"', URL::asset('image/stopcarimage.png') ,$body);
+        $body = str_replace('"../images/car/motioncarimage.png"',URL::asset('image/motioncarimage.png'),$body);
+      //  var_dump($body);
 //        while (!$body->eof()) {
 //            echo $body->read(1024);
 //        }
