@@ -27,7 +27,7 @@ use DB;
 use Session;
 class HomeController extends Controller {
     public function showHome(){
-        $cars = Car::lists('name', 'id');
+        $cars = Car::lists('name', 'id')->sort();
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
         return view('home', ['cars' => $cars, 'activities' => $activities]);
     }
@@ -77,7 +77,7 @@ class HomeController extends Controller {
 
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
         $customers = Customer::lists('name', 'id');
-        $locations = Location::lists('name', 'id');
+        $locations = Location::lists('name', 'id')->sort();
         $activity = Session::get('activity');
        // Session::forget('activity');
         return view('home', [ 'type'=> '1','activity' => $activity, 'customers' => $customers, 'locations' => $locations, 'activities' => $activities]);

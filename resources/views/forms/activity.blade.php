@@ -26,7 +26,7 @@
 
     <div class="form-group">
         {!! Form::label('type', 'Type') !!}
-        {!! Form::select('type', ['1'=>'On Day', '2'=>'Maintenance', '3'=>'Nil'], null, array('class' => 'form-control')) !!}
+        {!! Form::select('type', ['1'=>'On Day' , '3'=>'Off Day',  '2'=>'Maintenance'], null, array('class' => 'form-control')) !!}
     </div>
 
         {!! Form::submit('Submit', ['class' => 'btn btn-default']) !!}
