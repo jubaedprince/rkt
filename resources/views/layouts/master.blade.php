@@ -26,6 +26,7 @@
                 </ul>
             </li>
             <li  class = "{{ Request::is('car-status') ? 'active' : '' }}" ><a href="/car-status">Car Status</a></li>
+            <li  class = "{{ Request::is('activity-list') ? 'active' : '' }}" ><a href="/activity-list">Activity List</a></li>
         </ul>
 
         {{--navigation bar ends--}}

@@ -113,6 +113,10 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'car-status', 'uses' => 'CarStatusController@index'
     ]);
 
+    Route::get('/activity-list', [
+        'as' => 'activity-list', 'uses' => 'ActivityController@showListView'
+    ]);
+
 
 
     Route::post('/process', [

@@ -37,7 +37,7 @@ class ActivityController extends Controller
             $data = Nil::where('activity_id', '=', $id)->get()->pop();
         }
         return view('activity.edit', ['activity' => $activity, 'data' => $data, 'cars' => $cars,
-            'customers'=>$customers, 'locations'=>$locations]);;
+            'customers'=>$customers, 'locations'=>$locations]);
     }
 
     /**
@@ -125,5 +125,16 @@ class ActivityController extends Controller
 
 
         return Redirect::back();
+    }
+
+    public function showListView(Request $request){
+
+//        $activities = Activity::orderBy('created_at', 'desc')->get();
+
+        $activities = Activity::all()->groupBy(function($item){ return $item->date->format('d-M-y'); })->reverse();
+
+//        dd($activities);
+
+        return view('activity.list', ['activities' => $activities]);
     }
 }
