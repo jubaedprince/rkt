@@ -15,7 +15,7 @@ use App\Car;
 use App\Location;
 use App\Customer;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Item;
 class ActivityController extends Controller
 {
 
@@ -25,19 +25,22 @@ class ActivityController extends Controller
         $cars = Car::lists('name', 'id');
         $customers = Customer::lists('name', 'id');
         $locations = Location::lists('name', 'id');
-
+        $costs = null;
+        $items = null;
         if($activity->type == "On Day"){
             $data = Onday::where('activity_id', '=', $id)->get()->pop();
         }
         else if ($activity->type == "Maintenance"){
             $data = Maintenance::where('activity_id', '=', $id)->get()->pop();
+            $costs = $activity->maintenance->items;
+            $items = Item::lists('name', 'id')->sort();
         }
 
         else if ($activity->type == "Nil"){
             $data = Nil::where('activity_id', '=', $id)->get()->pop();
         }
         return view('activity.edit', ['activity' => $activity, 'data' => $data, 'cars' => $cars,
-            'customers'=>$customers, 'locations'=>$locations]);
+            'customers'=>$customers, 'locations'=>$locations, 'costs'=>$costs,  'items'=>$items]);
     }
 
     /**
@@ -49,6 +52,7 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        return $request->all();
         if ($request->input('activity_type')=="On Day"){
             $this->validate($request, [
                 'cost' => 'required|numeric',
@@ -73,12 +77,7 @@ class ActivityController extends Controller
 
         }
         else if($request->input('activity_type')=="Maintenance"){
-            $this->validate($request, [
-                'cost' => 'required|numeric',
-            ]);
-            $maintenance = Maintenance::where("activity_id", '=', $id)->first();
-            $maintenance->cost = $request->input('cost');
-            $maintenance->save();
+
             $activity = Activity::findOrFail($request->input('activity_id'));
             $activity->comment = $request->input('comment');
             $activity->save();
@@ -124,7 +123,7 @@ class ActivityController extends Controller
         }
 
 
-        return Redirect::back();
+        return Redirect::to('/home');
     }
 
     public function showListView(Request $request){

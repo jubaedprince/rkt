@@ -1,4 +1,11 @@
 <div class="col-md-8" style="background-color: #dedef8; border-radius:5px; padding: 20px">
+
+    <a href="/activity/{{ $activity->id }}/delete">
+        <button type="button" class="btn btn-default" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+    </a>
+
     <h1>On Day Form</h1>
 
     {!! Form::open(array('url' => 'process/onday', 'method' => 'post', 'class'=>'form-inline')) !!}

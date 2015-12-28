@@ -1,6 +1,3 @@
-{!! $data !!}
-{!! $activity !!}
-
 @extends('layouts.master')
 @section('content')
     <div class="col-md-8" style="background-color: #dedef8; border-radius:5px; padding: 20px">
@@ -105,17 +102,77 @@
                 </div>
             </div>
 
+
+            {!! Form::submit('Update', ['class' => 'btn btn-default']) !!}
+
+            {!! Form::close() !!}
+
         @elseif($activity->type === "Maintenance")
-            <div class="form-group">
-                {!! Form::label('cost', 'Cost') !!}
-                {!! Form::text('cost', $data->cost, array('class' => 'form-control')) !!}
-            </div>
+
+            @if(count($costs) > 0)
+                <table class="table table-bordered" style="background-color: white">
+                    <tr>
+                        <th>Item</th>
+                        <th>Cost</th>
+                        <th>Action</th>
+                    </tr>
+                    @foreach($costs as $cost)
+                        <tr>
+                            <td>{{$cost->name}}</td>
+                            <td>{{$cost->pivot->cost}}</td>
+                            <td>
+                                <a href="/process/maintenance/item/{{$cost->pivot->id}}/delete?maintenance_id={{$activity->maintenance->id}}">
+                                    <button type="button" class="btn btn-default" aria-label="Delete">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            @endif
 
 
+            {{--Maintenance form --}}
             <div class="form-group">
                 {!! Form::label('comment', 'Comment') !!}
                 {!! Form::textArea('comment', $activity->comment, array('class' => 'form-control')) !!}
             </div>
+
+
+            {!! Form::submit('Update', ['class' => 'btn btn-default']) !!}
+
+            {!! Form::close() !!}
+
+            {{--add item form--}}
+            {!! Form::open(array('url' => 'process/maintenance/item', 'method' => 'post')) !!}
+            {!! Form::hidden('maintenance_id', $activity->maintenance->id) !!}
+
+            <div class="form-group">
+                {!! Form::label('item', 'Item') !!}
+                {!! Form::select('item', $items, null, array('class' => 'form-control')) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('cost', 'Cost') !!}
+                {!! Form::text('cost', null, array('class' => 'form-control')) !!}
+            </div>
+
+            {!! Form::submit('Add Item', ['class' => 'btn btn-default']) !!}
+            {!! Form::close() !!}
+
+
+            {{--Add item name form --}}
+            {!! Form::open(array('url' => '/process/maintenance/item-name', 'method' => 'post')) !!}
+            {!! Form::hidden('maintenance_id', $activity->maintenance->id) !!}
+
+            <div class="form-group">
+                {!! Form::label('name', 'Item Name') !!}
+                {!! Form::text('name', null, array('class' => 'form-control')) !!}
+            </div>
+
+            {!! Form::submit('Add Item Name', ['class' => 'btn btn-default']) !!}
+            {!! Form::close() !!}
 
 
         @elseif($activity->type === "Nil")
@@ -129,11 +186,12 @@
                 {!! Form::label('comment', 'Comment') !!}
                 {!! Form::textArea('comment', $activity->comment, array('class' => 'form-control')) !!}
             </div>
+
+            {!! Form::submit('Update', ['class' => 'btn btn-default']) !!}
+
+            {!! Form::close() !!}
         @endif
 
 
-        {!! Form::submit('Update', ['class' => 'btn btn-default']) !!}
-
-        {!! Form::close() !!}
     </div>
 @endsection

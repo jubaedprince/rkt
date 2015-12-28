@@ -13,6 +13,7 @@
     {{--<p>This is my home content.</p>--}}
     {{--<p>Route name: {!!Route::currentRouteName()!!}</p>--}}
     <p>{!!Auth::user()->name!!}, <a href="/auth/logout">Logout</a></p>
+    @if(Auth::user()->isAdmin() || Auth::user()->isUser())
     @if (Route::currentRouteName() === 'home')
         @include('forms.activity', ['cars' => $cars])
 
@@ -26,6 +27,7 @@
     @elseif (Route::currentRouteName() === 'process.nilForm')
         @include('forms.nil', [])
 
+    @endif
     @endif
 <div>
     <table class="table table-striped">
@@ -65,19 +67,22 @@
                     <td>{{ $activity->onday->location_destination->name }}</td>
                 @else  <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
                 @endif
-                <td>
-                    <a href="/activity/{{ $activity->id }}/delete">
-                        <button type="button" class="btn btn-default" aria-label="Remove">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                    </a>
 
-                    <a href="/activity/{{ $activity->id }}/edit">
-                        <button type="button" class="btn btn-default" aria-label="Edit">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                        </button>
-                    </a>
-                </td>
+                @if(Auth::user()->isAdmin())
+                    <td>
+                        <a href="/activity/{{ $activity->id }}/delete">
+                            <button type="button" class="btn btn-default" aria-label="Remove">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </a>
+
+                        <a href="/activity/{{ $activity->id }}/edit">
+                            <button type="button" class="btn btn-default" aria-label="Edit">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </a>
+                    </td>
+                @endif
             </tr>
         @endforeach
 

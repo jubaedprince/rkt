@@ -147,6 +147,7 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'process.maintenanceForm', 'uses' => 'HomeController@processMaintenanceFormView'
     ]);
 
+
     //report
     Route::group(['prefix' => 'report'], function () {
 
@@ -168,10 +169,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-
-
-
-
     Route::get('activity/{id}/delete', [
         'as' => 'activity.delete', 'uses' => 'ActivityController@destroy'
     ]);
@@ -179,10 +176,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('activity', 'ActivityController', ['only', ['edit', 'update']]);
 
 
+    Route::post('/process/maintenance/item', [
+        'as' => 'process.maintenance.item', 'uses' => 'HomeController@addItem'
+    ]);
 
 
-    //Route::post('/process/maintenance/item', [
-    //    'as' => 'process.maintenance.item', 'uses' => 'HomeController@addItem'
-    //]);
+    Route::get('/process/maintenance/item/{item}/delete', [
+        'as' => 'process.maintenance.item.delete', 'uses' => 'HomeController@deleteItem'
+    ]);
+
+    Route::post('/process/maintenance/item-name', [
+        'as' => 'process.maintenance.item-name', 'uses' => 'HomeController@addItemName'
+    ]);
+
+    Route::get('/process/maintenance/item-name', [
+        'as' => 'process.maintenance.item-name', 'uses' => 'HomeController@addItemNameView'
+    ]);
+
+
+
 });
 //

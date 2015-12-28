@@ -38,19 +38,22 @@
                             <td>{{ $activity->onday->location_destination->name }}</td>
                         @else  <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
                         @endif
-                        <td>
-                            <a href="/activity/{{ $activity->id }}/delete">
-                                <button type="button" class="btn btn-default" aria-label="Remove">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                            </a>
 
-                            <a href="/activity/{{ $activity->id }}/edit">
-                                <button type="button" class="btn btn-default" aria-label="Edit">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                </button>
-                            </a>
-                        </td>
+                        @if(Auth::user()->isAdmin())
+                            <td>
+                                <a href="/activity/{{ $activity->id }}/delete">
+                                    <button type="button" class="btn btn-default" aria-label="Remove">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+
+                                <a href="/activity/{{ $activity->id }}/edit">
+                                    <button type="button" class="btn btn-default" aria-label="Edit">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
                 <br>

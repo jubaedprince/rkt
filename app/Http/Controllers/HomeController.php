@@ -27,6 +27,7 @@ use DB;
 use Session;
 class HomeController extends Controller {
     public function showHome(){
+        Session::forget('maintenance');
         $cars = Car::lists('name', 'id')->sort();
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
         return view('home', ['cars' => $cars, 'activities' => $activities]);
@@ -55,11 +56,6 @@ class HomeController extends Controller {
         }
         else if($type == '2'){
             return redirect()->route('process.maintenanceForm');
-//            $items = Item::lists('name', 'id');
-//            $maintenance = new Maintenance;
-//            $maintenance->activity_id = $activity->id;
-//            $maintenance->save();
-//            return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities, 'items'=>$items, 'maintenance_id'=>$maintenance->id]);
           //  return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities]);
         }
 
@@ -129,37 +125,61 @@ class HomeController extends Controller {
         return view('home', [ 'type'=> '3', 'activity' => $activity, 'activities' => $activities]);
     }
     public function processMaintenanceForm(Request $request){
-        $this->validate($request, [
-            'cost' => 'required|numeric',
-        ]);
-        $maintenance = new Maintenance;
-        $maintenance->activity_id = $request->input('activity_id');
-        $maintenance->cost = $request->input('cost');
-        $maintenance->save();
-        $activity = Activity::findOrFail($request->input('activity_id'));
-        $activity->comment = $request->input('comment');
+        $activity = Session::get('activity');
+        $activity->comment = $request->comment;
         $activity->save();
+        Session::forget('maintenance');
         return redirect()->route('home');
     }
     public function processMaintenanceFormView(){
         $activity = Session::get('activity');
-       // Session::forget('activity');
+        $items = Item::lists('name', 'id')->sort();
+        $old_maintenance = Session::get('maintenance');
+        if($old_maintenance == null) {
+            $maintenance = new Maintenance;
+            $maintenance->activity_id = $activity->id;
+            $maintenance->save();
+            Session::put('maintenance', $maintenance);
+        }else{
+            $maintenance = $old_maintenance;
+        }
+        $costs = Maintenance::find($maintenance->id)->items;
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
-        return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities]);
+        return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities, 'items'=>$items, 'maintenance_id'=>$maintenance->id, 'costs'=>$costs]);
+
+       // Session::forget('activity');
+
+//        return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities]);
     }
 
-//    public function addItem(Request $request){
-//        //return ($request->all());
-//        DB::table('item_maintenance')->insert(
-//            array('item_id' => $request->input('item'), 'maintenance_id' => $request->input('maintenance_id'), 'cost' => $request->input('cost') )
-//        );
-//        $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
-//        $maintenance = Maintenance::findOrFail($request->input('maintenance_id'));
-//        $activity = $maintenance->activity;
-//        $items = Item::lists('name', 'id');
-//        return view('home', [ 'type'=> '2', 'activity' => $activity, 'activities' => $activities, 'items'=>$items, 'maintenance_id'=>$request->input('maintenance_id')]);
-//        //return redirect()->back()->with(['maintenance_id' => $request->input('maintenance_id')]);
-//    }
+    public function addItem(Request $request){
+//        return "hi";
+        $maintenance_item = Maintenance::find($request->maintenance_id)->items()->save(Item::find($request->item), ['cost' => $request->cost]);
+        $maintenance =  Maintenance::find($request->maintenance_id);
+        $maintenance->cost =  $maintenance->cost + $request->cost;
+        $maintenance->save();
+        return redirect()->back();
+    }
 
+    public function deleteItem($item, Request $request){
+        $pivot = DB::table('item_maintenance')->where('id', $item)->first();
+
+        $maintenance =  Maintenance::find($pivot->maintenance_id);
+        $maintenance->cost =  $maintenance->cost - $pivot->cost;
+        $maintenance->save();
+
+        $result = DB::table('item_maintenance')->where('id', $item)->delete();
+//        return $result;
+        return redirect()->back();
+    }
+
+    public function addItemNameView(){
+        return "add item";
+    }
+
+    public function addItemName(Request $request){
+        $item = Item::create($request->all());
+        return redirect()->back();
+    }
 
 }
