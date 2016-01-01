@@ -7,7 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     /*
@@ -60,6 +60,46 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'company_name' => $data['company_name'],
+            'position' => $data['position'],
+            'type' => $data['type']
         ]);
     }
+
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+//        Auth::login($this->create($request->all()));
+        $this->create($request->all());
+        return redirect($this->redirectPath());
+    }
+
+    public function postLogin (Request $request)
+    {
+
+        $this->validate($request, [
+            'email' => 'required', 'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $credentials['approved'] = 1;
+
+        if (\Auth::attempt($credentials, $request->has('remember'))) {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect('auth/login')
+            ->withInput($request->only('email'))
+            ->withErrors([
+                'email' => 'You are not registered/approved'
+            ]);
+    }
+
 }

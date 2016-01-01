@@ -25,6 +25,24 @@
         </div>
 
         <div class="form-group">
+            Company Name
+            <input class="form-control" type="text" name="company_name" value="{{ old('company_name') }}">
+        </div>
+
+        <div class="form-group">
+            Position
+            <input class="form-control" type="text" name="position" value="{{ old('position') }}">
+        </div>
+
+        <div class="form-group">
+            Type
+            <select class="form-control"  name="type">
+                <option value="user">User</option>
+                <option value="viewer">Viewer</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             Password
             <input class="form-control" type="password" name="password">
         </div>

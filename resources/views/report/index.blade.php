@@ -1,53 +1,111 @@
 @extends('layouts.master')
 @section('content')
     <h1>{{$date}}</h1>
-    {{--<div>--}}
-    {{--<a href="#" class="btn btn-primary btn-lg" role="button">View</a>--}}
-    {{--<a href="#" class="btn btn-primary btn-lg" role="button">Generate</a>--}}
-    {{--</div>--}}
+    <script type="text/javascript" src="{{ URL::asset('components/js/ChartNew.js') }}"></script>
+    <br><br>
 
+    <style>
+        #my-doughnut-legend{
+            float: right;
+        }
 
-    <script type="text/javascript" src="{{ URL::asset('components/js/Chart.min.js') }}">alert("I am an alert box!");</script>
-    <br><br><br><br>
-    <div style="margin-left:300px "><canvas id="myChart" width="500" height="500"></canvas></div>
+        #my-doughnut-legend ul {
+            list-style-type: none;
+            width:200px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: white;
+            /*border:1px solid black;*/
+        }
 
+        #my-doughnut-legend li span {
+            display: block;
+            width: 14px;
+            height: 14px;
+            border-radius: 7px;
+            float: left;
+            margin-top: 4px;
+            margin-right: 8px;
+        }
+
+        #my-doughnut-legend {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            margin-top : 20px;
+
+        }
+
+        #my-doughnut-legend li {
+            margin-bottom : 4px;
+        }
+
+        #my-doughnut-legend li:first-letter {
+            text-transform: capitalize;
+        }
+
+        .comm-how {
+            display: inline-block;
+            float : left;
+            color : #979797;
+            width : 25px;
+            text-align: right;
+            margin-right : 10px;
+        }
+
+    </style>
     <script>
-        (function() {
-            var ctx = document.getElementById('myChart').getContext('2d');
-
-            var chart = {
-                labels:{!! json_encode($trucks) !!},
-                graphTitle : "Sinus - Cosinus",
-                datasets: [
+        var linedata = {
+            labels: {!! json_encode($trucks) !!},
+        graphTitle : "Sinus - Cosinus",
+                datasets : [
             {
                 label: "Cost",
-                fillColor: "rgba(255,0,0,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: {!! json_encode($costs) !!}
-            },
-            {
-                label: "Revenue",
-                fillColor: "rgba(0,255,0,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data:   {!! json_encode($costs) !!}
+        },
+        {
+            label: "Revenue",
+                    fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
                 data: {!! json_encode($revenue) !!}
-            }
+        }
         ]
-            };
+        }
 
-            var chart = new Chart(ctx).Bar(chart, {
-                bezierCurve: false,
-                scaleOverride : true,
-                scaleSteps : 10,
-                scaleStepWidth : 5000,
-                graphTitle : "RKT Fare and Market Fare Comparison",
-                scaleStartValue : 0,
 
-            });
-        })();
+        var opt1 = {
+            canvasBorders : true,
+            showTooltips: true,
+            scaleLabel : "৳ <%=value%>",
+            canvasBordersWidth : 1,
+            canvasBordersColor : "black",
+            datasetFill : false,
+            legend : true,
+            graphTitle : "Cost and Revenue Comparison",
+            graphTitleFontSize: 18,
+            bezierCurve: false
+
+
+        }
+
+
     </script>
-
+    <canvas id="canvas" height="500" width="1000"></canvas>
+    <script>
+        window.onload = function() {
+            new Chart(document.getElementById("canvas").getContext("2d")).Bar(linedata, opt1
+            );
+        }
+    </script>
 @endsection

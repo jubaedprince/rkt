@@ -198,6 +198,17 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
 
+    Route::get('/users', [
+        'as' => 'users', 'uses' => 'UserController@index'
+    ]);
+
+    Route::get('/users/reject/{id}', [
+        'as' => 'users.reject', 'uses' => 'UserController@rejectUser'
+    ]);
+
+    Route::get('/users/approve/{id}', [
+        'as' => 'users.approve', 'uses' => 'UserController@approveUser'
+    ]);
 
 });
 //

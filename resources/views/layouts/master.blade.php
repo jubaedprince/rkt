@@ -28,6 +28,9 @@
             </li>
             <li  class = "{{ Request::is('car-status') ? 'active' : '' }}" ><a href="/car-status">Car Status</a></li>
             <li  class = "{{ Request::is('activity-list') ? 'active' : '' }}" ><a href="/activity-list">Activity List</a></li>
+            @if(Auth::user()->isAdmin())
+                <li class = "{{ Request::is('users') ? 'active' : '' }}"><a href="/users">Users </a></li>
+            @endif
         </ul>
 
         {{--navigation bar ends--}}

@@ -13,12 +13,26 @@
                 <th>Type</th>
                 <th>Origin</th>
                 <th>Destination</th>
+                <th>Action</th>
+                <th>Option</th>
             </tr>
             </thead>
             <tbody>
 
             @foreach ($activities as $key => $activities)
-                <tr><th>{{$key}}</th></tr>
+                <thead>
+                <tr style="background-color: #10e8d5"> <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="color: #187c86">{{$key}}</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th></tr>
+                </thead>
 
                 @foreach ($activities as $activity)
                     <tr>
@@ -41,12 +55,6 @@
 
                         @if(Auth::user()->isAdmin())
                             <td>
-                                @if($activity->type == "Maintenance")
-                                    @if($activity->maintenance->upload != null)
-                                        <a target="_blank"  href="{{URL ::to('/').$activity->maintenance->upload}}">Upload</a>
-                                    @endif
-                                @endif
-
                                 <a href="/activity/{{ $activity->id }}/delete">
                                     <button type="button" class="btn btn-default" aria-label="Remove">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -60,13 +68,17 @@
                                 </a>
                             </td>
                         @endif
+                        <td>
+                            @if($activity->type == "Maintenance")
+                                @if($activity->maintenance->upload != null)
+                                    <a target="_blank"  href="{{URL ::to('/').$activity->maintenance->upload}}">Upload</a>
+                                @endif
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
-                <br>
             @endforeach
-
             </tbody>
         </table>
-
     </div>
 @endsection
