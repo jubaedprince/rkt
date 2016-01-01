@@ -23,6 +23,7 @@
                     <li><a href="/report/price-comparison">Fare Comparison</a></li>
                     <li><a href="/report/monthly-cost-revenue">Monthly Cost-Revenue</a></li>
                     <li><a href="#">Detailed Truck Report</a></li>
+                    <li><a href="#">Maintenance Report</a></li>
                 </ul>
             </li>
             <li  class = "{{ Request::is('car-status') ? 'active' : '' }}" ><a href="/car-status">Car Status</a></li>

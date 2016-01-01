@@ -1,27 +1,43 @@
-<form method="POST" action="/auth/register">
-    {!! csrf_field() !!}
+@extends('layouts.master')
+<div class="col-md-4 col-md-offset-4">
+    <form class="form" method="POST" action="/auth/register">
+        {!! csrf_field() !!}
 
-    <div>
-        Name
-        <input type="text" name="name" value="{{ old('name') }}">
-    </div>
+        <h1>Rubaiyat Kamal Transport</h1><br>
+        <h3>Apply for Account</h3>
 
-    <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
-    </div>
+        @if (count($errors) > 0)
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
+        <div class="form-group">
+            Name
+            <input class="form-control" type="text" name="name" value="{{ old('name') }}">
+        </div>
 
-    <div>
-        Confirm Password
-        <input type="password" name="password_confirmation">
-    </div>
+        <div class="form-group">
+            Email
+            <input class="form-control" type="email" name="email" value="{{ old('email') }}">
+        </div>
 
-    <div>
-        <button type="submit">Register</button>
-    </div>
-</form>
+        <div class="form-group">
+            Password
+            <input class="form-control" type="password" name="password">
+        </div>
+
+        <div class="form-group">
+            Confirm Password
+            <input class="form-control" type="password" name="password_confirmation">
+        </div>
+
+        <div class="form-group">
+            <button class="form-control" type="submit">Register</button>
+        </div>
+    </form>
+    <div> Go back to <a href="/auth/login">Login</a></div>
+
+</div>
