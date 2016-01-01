@@ -38,6 +38,17 @@
         </div>
 
         @if($activity->type === "On Day")
+            @foreach($ondayOtherCosts as $ondayOtherCost)
+                <div class="form-group">
+                    <div class="form-group">
+                        {!! Form::label('other_cost['.$ondayOtherCost->onday_other_cost_item_id.']', App\OndayOtherCostItem::find($ondayOtherCost->onday_other_cost_item_id)->name,  ['class'=> 'col-sm-5 control-label']) !!}
+                        <div class="col-md-11">
+                            {!! Form::text('other_cost['.$ondayOtherCost->onday_other_cost_item_id.']', $ondayOtherCost->cost, array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         <div class="form-group">
             {!! Form::label('type', 'Type', ['class'=> 'col-sm-2 control-label']) !!}
             <div class="col-sm-11">

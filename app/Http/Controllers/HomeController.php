@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OndayOtherCost;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,9 +23,12 @@ use App\Onday;
 use App\Nil;
 use App\Item;
 use App\Maintenance;
+use App\OndayOtherCostItem;
 
 use DB;
 use Session;
+use Input;
+
 class HomeController extends Controller {
     public function showHome(){
         Session::forget('maintenance');
@@ -75,8 +79,9 @@ class HomeController extends Controller {
         $customers = Customer::lists('name', 'id');
         $locations = Location::lists('name', 'id')->sort();
         $activity = Session::get('activity');
+        $ondayOtherCostItems = OndayOtherCostItem::lists('name', 'id');
        // Session::forget('activity');
-        return view('home', [ 'type'=> '1','activity' => $activity, 'customers' => $customers, 'locations' => $locations, 'activities' => $activities]);
+        return view('home', [ 'type'=> '1','activity' => $activity, 'customers' => $customers, 'locations' => $locations, 'activities' => $activities, 'ondayOtherCostItems' => $ondayOtherCostItems]);
     }
 
     public function processOndayForm(Request $request){
@@ -100,6 +105,20 @@ class HomeController extends Controller {
         $activity = Activity::findOrFail($request->input('activity_id'));
         $activity->comment = $request->input('comment');
         $activity->save();
+
+        //adding onday other costs
+        $other_cost = $request->input('other_cost');
+        foreach ($other_cost as $key => $value){
+            if($value){
+                $onday_other_cost = OndayOtherCost::create(['cost'=> $value]);
+                $onday_other_cost->onday_id = $onday->id;
+                $onday_other_cost->onday_other_cost_item_id = $key;
+                $onday_other_cost->save();
+                $onday->cost =  $onday->cost + $value;
+                $onday->save();
+            }
+        }
+
         return redirect()->route('home');
     }
 
@@ -129,6 +148,21 @@ class HomeController extends Controller {
         $activity->comment = $request->comment;
         $activity->save();
         Session::forget('maintenance');
+
+        // getting all of the post data
+        $file = array('image' => Input::file('image'));
+
+        // checking file is valid.
+        if (Input::file('image')) {
+            $destinationPath = 'uploads'; // upload path
+            $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+
+            $activity->maintenance->upload = '/uploads/'.$fileName;
+            $activity->maintenance->save();
+        }
+
         return redirect()->route('home');
     }
     public function processMaintenanceFormView(){
@@ -182,4 +216,8 @@ class HomeController extends Controller {
         return redirect()->back();
     }
 
+    public function addOtherCostItem(Request $request){
+        $otherCostItem = OndayOtherCostItem::create($request->all());
+        return redirect()->back();
+    }
 }

@@ -20,7 +20,7 @@
                     Report <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/report/price-comparison">Price Comparison</a></li>
+                    <li><a href="/report/price-comparison">Fare Comparison</a></li>
                     <li><a href="/report/monthly-cost-revenue">Monthly Cost-Revenue</a></li>
                     <li><a href="#">Detailed Truck Report</a></li>
                 </ul>

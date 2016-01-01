@@ -1,10 +1,20 @@
 @extends('layouts.master')
 @section('content')
-
+    <h1>{{$date}}</h1>
     {{--<div>--}}
     {{--<a href="#" class="btn btn-primary btn-lg" role="button">View</a>--}}
     {{--<a href="#" class="btn btn-primary btn-lg" role="button">Generate</a>--}}
     {{--</div>--}}
+    <div>
+        @if($rate>0)
+            Rate Change: <br>
+            ▲ {{abs(round($rate,2))}} %
+        @else
+            Rate Change:<br>
+            ▼ {{abs(round($rate,2))}} %
+        @endif
+    </div>
+
 
 
     {{--<script type="text/javascript" src="{{ URL::asset('components/js/Chart.min.js') }}"></script>--}}
@@ -76,7 +86,7 @@
             graphTitle : "Sinus - Cosinus",
             datasets : [
             {
-                label: "Fare",
+                label: "RKT Fare",
                 fillColor: "rgba(220,220,220,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
@@ -86,7 +96,7 @@
                 data:   {!! json_encode($fare) !!}
         },
         {
-            label: "Market Rate",
+            label: "Market Fare",
                     fillColor: "rgba(151,187,205,0.2)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
@@ -107,9 +117,9 @@
             canvasBordersColor : "black",
             datasetFill : false,
             legend : true,
-            graphTitle : "Fare and Market Price Comparison",
+            graphTitle : "RKT Fare and Market Fare Comparison",
             graphTitleFontSize: 18,
-            bezierCurve: false,
+            bezierCurve: false
 
 
         }

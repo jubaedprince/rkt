@@ -2,7 +2,7 @@
 
     <a href="/activity/{{ $activity->id }}/delete">
         <button type="button" class="btn btn-default" aria-label="Close">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
         </button>
     </a>
 
@@ -92,6 +92,15 @@
 
     <br><br>
 
+    @foreach ($ondayOtherCostItems as $key => $value )
+        <div class="form-group">
+            {!! Form::label('other_cost['.$key.']', $value,  ['class'=> 'col-sm-5 control-label']) !!}
+            <div class="col-md-11">
+                {!! Form::text('other_cost['.$key.']', null, array('class' => 'form-control')) !!}
+            </div>
+        </div>
+    @endforeach
+
     <div class="form-group">
         {!! Form::label('comment', 'Comment',  ['class'=> 'col-sm-2 control-label']) !!}
         <div class="col-sm-11">
@@ -102,4 +111,20 @@
     {!! Form::submit('Submit', ['class' => 'btn btn-default']) !!}
 
     {!! Form::close() !!}
+
+    @if(Auth::user()->isAdmin())
+        {{--add other cost item form --}}
+        {!! Form::open(array('url' => '/process/onday/other-cost-item', 'method' => 'post', 'class'=>'form-inline')) !!}
+
+        <div class="form-group">
+            {!! Form::label('name', 'Other Cost Item Name',  ['class'=> 'col-sm-5 control-label']) !!}
+            <div class="col-md-11">
+                {!! Form::text('name', null, array('class' => 'form-control')) !!}
+            </div>
+        </div>
+
+        {!! Form::submit('Add Item', ['class' => 'btn btn-default']) !!}
+
+        {!! Form::close() !!}
+    @endif
 </div>

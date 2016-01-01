@@ -8,7 +8,7 @@ class Maintenance extends Model
 {
     protected $table = 'maintenances';
 
-    protected $fillable = ['activity_id', 'cost'];
+    protected $fillable = ['activity_id', 'cost', 'upload'];
 
     public function items(){
         return $this->belongsToMany('App\Item')->withPivot('id', 'cost');
@@ -18,4 +18,7 @@ class Maintenance extends Model
         return $this->belongsTo('App\Activity');
     }
 
+    public function uploadImage($url){
+
+    }
 }

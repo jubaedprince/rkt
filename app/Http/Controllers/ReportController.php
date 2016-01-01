@@ -36,8 +36,9 @@ class ReportController extends Controller {
     }
 
     public function processPriceComparison(Request $request){
+//        dd($request->all());
         //one month's activities grouped according to date
-        $activities = $this->getActivityOfOneMonth(8,2015)->sortBy('date')->groupBy(function($item){ return $item->date->format('d'); });
+        $activities = $this->getActivityOfOneMonth($request->month,$request->year)->sortBy('date')->groupBy(function($item){ return $item->date->format('d'); });
 
         $date_array = [];
         $market_price_array =[];
@@ -81,12 +82,18 @@ class ReportController extends Controller {
                 $c+=1;
             }
         };
+        $total_fare= array_sum($fare);
+        $total_market_rate = array_sum($market_rate);
+        $rate = 0;
+        if($total_fare != null && $total_market_rate!=null){
+            // TODO::check the math.
+            $change = $total_fare - $total_market_rate ;
+            $rate = $change/$total_market_rate*100;
+        }
 
-        //  dd($dates);
+        $date = $this->getDateString($request);
 
-
-
-        return view('report.priceComparison', ['market_rate'=>$market_rate, 'fare'=>$fare, 'dates'=>$dates]);
+        return view('report.priceComparison', ['market_rate'=>$market_rate, 'fare'=>$fare, 'dates'=>$dates, 'rate'=>$rate, 'date'=>$date]);
     }
 
     public function monthlyCostRevenue(){
@@ -118,9 +125,15 @@ class ReportController extends Controller {
             $revenue[$key] = $revenue[$key] + $activity->fare;
         }
 
+        $date = $this->getDateString($request);
 
-        return view('report.index', ['trucks'=>$trucks, 'costs'=>$costs, 'revenue'=>$revenue]);
+        return view('report.index', ['trucks'=>$trucks, 'costs'=>$costs, 'revenue'=>$revenue, 'date'=>$date]);
     }
 
+    public function getDateString($request){
+        $monthNum  = $request->month;
+        $monthName =  date('F', mktime(0, 0, 0, $monthNum, 10));
+        return $monthName. ' ' .$request->year;
+    }
 
 }

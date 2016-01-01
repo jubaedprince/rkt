@@ -41,6 +41,12 @@
 
                         @if(Auth::user()->isAdmin())
                             <td>
+                                @if($activity->type == "Maintenance")
+                                    @if($activity->maintenance->upload != null)
+                                        <a target="_blank"  href="{{URL ::to('/').$activity->maintenance->upload}}">Upload</a>
+                                    @endif
+                                @endif
+
                                 <a href="/activity/{{ $activity->id }}/delete">
                                     <button type="button" class="btn btn-default" aria-label="Remove">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

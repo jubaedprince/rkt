@@ -2,7 +2,7 @@
 
     <a href="/activity/{{ $activity->id }}/delete">
         <button type="button" class="btn btn-default" aria-label="Close">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
         </button>
     </a>
 
@@ -82,7 +82,7 @@
     {!! Form::submit('Add Item', ['class' => 'btn btn-default']) !!}
     {!! Form::close() !!}
 
-
+    <div>Total Cost: ৳ {!!number_format(floatval(App\Activity::find($activity->id)->maintenance->cost)) !!}</div>
     {{--Add item name form --}}
     {!! Form::open(array('url' => '/process/maintenance/item-name', 'method' => 'post')) !!}
     {!! Form::hidden('maintenance_id', $maintenance_id) !!}
@@ -97,12 +97,24 @@
 
 
     {{--Maintenance form --}}
-    {!! Form::open(array('url' => 'process/maintenance', 'method' => 'post')) !!}
+    {!! Form::open(array('url' => 'process/maintenance', 'method' => 'post', 'files'=>true)) !!}
+    <div class="control-group">
+        <div class="controls">
+            {!! Form::file('image') !!}
+            <p class="errors">{!!$errors->first('image')!!}</p>
+            @if(Session::has('error'))
+                <p class="errors">{!! Session::get('error') !!}</p>
+            @endif
+        </div>
+    </div>
+    <div id="success"> </div>
     {!! Form::hidden('activity_id', $activity->id) !!}
     <div class="form-group">
         {!! Form::label('comment', 'Comment') !!}
         {!! Form::textArea('comment', null, array('class' => 'form-control')) !!}
     </div>
+
+
 
     {!! Form::submit('Submit', ['class' => 'btn btn-default']) !!}
 

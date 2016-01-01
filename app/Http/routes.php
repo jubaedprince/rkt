@@ -131,6 +131,10 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'process.ondayForm', 'uses' => 'HomeController@processOndayFormView'
     ]);
 
+    Route::post('/process/onday/other-cost-item', [
+        'as' => 'process.ondayForm.other-cost-item', 'uses' => 'HomeController@addOtherCostItem'
+    ]);
+
     Route::post('/process/nil', [
         'as' => 'process.nil', 'uses' => 'HomeController@processNilForm'
     ]);

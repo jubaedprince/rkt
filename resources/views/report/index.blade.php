@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-
+    <h1>{{$date}}</h1>
     {{--<div>--}}
     {{--<a href="#" class="btn btn-primary btn-lg" role="button">View</a>--}}
     {{--<a href="#" class="btn btn-primary btn-lg" role="button">Generate</a>--}}
@@ -17,6 +17,7 @@
 
             var chart = {
                 labels:{!! json_encode($trucks) !!},
+                graphTitle : "Sinus - Cosinus",
                 datasets: [
             {
                 label: "Cost",
@@ -42,6 +43,7 @@
                 scaleOverride : true,
                 scaleSteps : 10,
                 scaleStepWidth : 5000,
+                graphTitle : "RKT Fare and Market Fare Comparison",
                 scaleStartValue : 0,
 
             });
