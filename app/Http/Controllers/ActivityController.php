@@ -79,14 +79,16 @@ class ActivityController extends Controller
 
             //adding onday other costs
             $other_cost = $request->input('other_cost');
-            foreach ($other_cost as $key => $value){
-                $onday_other_cost = OndayOtherCost::where('onday_id', $onday->id)->where('onday_other_cost_item_id', $key)->first();
-                $temp = $onday_other_cost->cost;
-                $onday_other_cost->cost = $value;
-                $onday->cost =  $onday->cost - $temp;
-                $onday->cost =  $onday->cost + $value;
-                $onday_other_cost->save();
-                $onday->save();
+            if($other_cost != null){
+                foreach ($other_cost as $key => $value){
+                    $onday_other_cost = OndayOtherCost::where('onday_id', $onday->id)->where('onday_other_cost_item_id', $key)->first();
+                    $temp = $onday_other_cost->cost;
+                    $onday_other_cost->cost = $value;
+                    $onday->cost =  $onday->cost - $temp;
+                    $onday->cost =  $onday->cost + $value;
+                    $onday_other_cost->save();
+                    $onday->save();
+                }
             }
 
             return redirect()->route('home');
