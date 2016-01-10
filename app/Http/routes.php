@@ -210,5 +210,16 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'users.approve', 'uses' => 'UserController@approveUser'
     ]);
 
+    //report
+    Route::group(['prefix' => 'hr'], function () {
+
+        Route::get('/profile', [
+            'as' => 'hr-profile', 'uses' => 'HRController@profile'
+        ]);
+
+        Route::resource('employee', 'EmployeeController', []);
+
+    });
+
 });
 //

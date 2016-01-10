@@ -31,6 +31,16 @@
             @if(Auth::user()->isAdmin())
                 <li class = "{{ Request::is('users') ? 'active' : '' }}"><a href="/users">Users </a></li>
             @endif
+
+            <li  class = "{{ Request::is('hr/*') ? 'dropdown active' : 'dropdown' }}" role="presentation">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    HR <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/hr/employee">Profile</a></li>
+                    <li><a href="#">Salary</a></li>
+                </ul>
+            </li>
         </ul>
 
         {{--navigation bar ends--}}
