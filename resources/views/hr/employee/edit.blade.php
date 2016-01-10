@@ -2,7 +2,7 @@
 @section('content')
     <h1>Edit Employee</h1>
 
-    {!! Form::open(array('route' => array('hr.employee.update', $employee->id), 'method' => 'PUT'))  !!}
+    {!! Form::open(array('route' => array('hr.employee.update', $employee->id), 'method' => 'PUT', 'files'=>true))  !!}
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>

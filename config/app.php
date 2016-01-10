@@ -145,7 +145,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 //        'Illuminate\Html\HtmlServiceProvider'
-        'Collective\Html\HtmlServiceProvider'
+        'Collective\Html\HtmlServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
     ],
 
     /*
@@ -199,6 +200,7 @@ return [
 
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'Image' => 'Intervention\Image\Facades\Image'
     ],
 
 ];

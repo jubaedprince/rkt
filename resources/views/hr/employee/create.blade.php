@@ -2,7 +2,7 @@
 @section('content')
     <h1>Add New Employee</h1>
 
-    {!! Form::open(array('url' => '/hr/employee', 'method' => 'post')) !!}
+    {!! Form::open(array('url' => '/hr/employee', 'method' => 'post', 'files'=>true)) !!}
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>

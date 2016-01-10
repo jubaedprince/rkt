@@ -7,23 +7,25 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Employee;
-
+use Input;
 class EmployeeController extends Controller
 {
 
     public function index(Request $request)
     {
-        //TODO::later for sorting
-//        if($request->sort == 'status_dsc'){
-//            $employees = Employee::all()->sortByDesc('status');
-//        }else if($request->sort == 'status_asc'){
-//            $employees = Employee::all()->sortBy('status');
-//        }
-//        else if($request->sort == 'status_asc'){
-//            $employees = Employee::all()->sortBy('status');
-//        }
+        $employees = Employee::all();
 
-        $employees = Employee::all()->sortByDesc('status');
+        if($request->sort == 'status_dsc'){
+            $employees = Employee::all()->sortByDesc('status');
+        }else if($request->sort == 'status_asc'){
+            $employees = Employee::all()->sortBy('status');
+        }
+        else if($request->sort == 'name'){
+            $employees = Employee::all()->sortBy('name');
+        }
+        else if($request->sort == 'id'){
+            $employees = Employee::all()->sortBy('id');
+        }
 
         return view('hr.employee.index', compact('employees'));
     }
@@ -52,7 +54,14 @@ class EmployeeController extends Controller
 
         ]);
 
-        Employee::create($request->all());
+        $employee = Employee::create($request->all());
+
+
+        if($request->photo){
+            $employee->photo = $this->upload();
+        }
+
+        $employee->save();
 
         return redirect()->to('/hr/employee');
 
@@ -102,7 +111,7 @@ class EmployeeController extends Controller
         $employee->email = $request->email;
 
         if($request->photo){
-            $employee->photo = $request->photo;
+            $employee->photo = $this->upload();
         }
 
         $employee->save();
@@ -117,5 +126,25 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->to('/hr/employee');
+    }
+
+    public function upload($input_name='photo'){
+        $image_file = Input::file($input_name);
+        if ($image_file)
+        {
+
+            $faker = str_random(28);
+
+            $image = (\Image::make($image_file)->resize(null, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save('employee_pic/'.$faker . '-' . $image_file->getClientOriginalName()));
+
+            return $image->dirname . '/' . $image->basename;
+
+        }else{
+
+            return null;
+        }
     }
 }
