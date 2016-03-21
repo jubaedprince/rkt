@@ -28,6 +28,7 @@ use App\OndayOtherCostItem;
 use DB;
 use Session;
 use Input;
+use Carbon;
 
 class HomeController extends Controller {
     public function showHome(){
@@ -48,7 +49,9 @@ class HomeController extends Controller {
         $type = $request->input('type');
 
         $activity = new Activity;
-        $activity->date = $date;
+        $carbon_date = Carbon\Carbon::createFromFormat('m/d/Y', $date);
+        // dd($carbon_date->format('Y-m-d'));
+        $activity->date = $carbon_date->format('Y-m-d');
         $activity->car_id = $car_id;
         $activity->save();
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
@@ -156,7 +159,7 @@ class HomeController extends Controller {
         if (Input::file('image')) {
             $destinationPath = 'uploads'; // upload path
             $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-            $fileName = rand(11111,99999).'.'.$extension; // renameing image
+            $fileName = pathinfo(Input::file('image')->getClientOriginalName() , PATHINFO_FILENAME) . '-' . $activity->id .'.'.$extension; // renameing image
             Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 
             $activity->maintenance->upload = '/uploads/'.$fileName;

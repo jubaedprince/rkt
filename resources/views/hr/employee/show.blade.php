@@ -18,57 +18,72 @@
                                 <table class="table table-user-information">
                                     <tbody>
 
-                                    <tr>
-                                        <td>ID</td>
-                                        <td>{{$employee->id}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>{{$employee->id}}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>Designation:</td>
-                                        <td>{{$employee->designation}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>Designation:</td>
+                                            <td>{{$employee->designation}}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>National ID</td>
-                                        <td>{{$employee->national_id}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>National ID</td>
+                                            <td>{{$employee->national_id}}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>RKT/Amtranet ID</td>
-                                        <td>{{$employee->raid}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Present Address</td>
-                                        <td>{{$employee->present_address}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>RKT/Amtranet ID</td>
+                                            <td>{{$employee->raid}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Present Address</td>
+                                            <td>{{$employee->present_address}}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>Permanent Address</td>
-                                        <td>{{$employee->permanent_address}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>Permanent Address</td>
+                                            <td>{{$employee->permanent_address}}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>Status</td>
-                                        <td>
-                                            @if($employee->status==true)
-                                                Active
-                                            @else
-                                                Inactive
-                                            @endif
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>
+                                                @if($employee->status==true)
+                                                    Active
+                                                @else
+                                                    Inactive
+                                                @endif
+                                            </td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>Email</td>
-                                        <td><a href="mailto:{{$employee->email}}">{{$employee->email}}</a></td>
-                                    </tr>
-                                    <td>Mobile Number</td>
-                                    <td>{{$employee->mobile}}</td>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td><a href="mailto:{{$employee->email}}">{{$employee->email}}</a></td>
+                                        </tr>
 
-                                    </tr>
+                                        <tr>
+                                            <td>Mobile Number</td>
+                                            <td>{{$employee->mobile}}</td>
+
+                                        </tr>
+
+                                        @if(count($employee->attachments) > 0)
+                                            @foreach($employee->attachments as $attachment)
+                                                <tr>
+                                                    <td>Supplimentary Document</td>
+                                                    <td><a href="{{$attachment->location}}" target="_blank">{{$attachment->name}}</a></td>
+                                                    <td><a href="/hr/employee/{{$employee->id}}/attachment/{{$attachment->id}}/delete" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+
 
                                     </tbody>
                                 </table>
+
+                                <a href="/hr/employee/{{$employee->id}}/attachment/create" type="button" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i> Add Supplimentary Document</a>
 
                             </div>
                         </div>

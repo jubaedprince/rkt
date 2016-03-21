@@ -68,8 +68,9 @@
             </table>
         @endif
         <div class="row">
-            {!! Form::open(array('route' => 'hr.salary_sheet.salary_sheet_records.store', 'method' => 'post', 'files'=>true)) !!}
+            {!! Form::open(array('route' => 'hr.salary_sheet.salary_sheet_records.update', 'method' => 'put')) !!}
             {!! Form::hidden('salary_sheet_id', $salary_sheet->id, array('class' => 'form-control')) !!}
+            {!! Form::hidden('salary_sheet_record_id', $salary_sheet_record->id, array('class' => 'form-control')) !!}
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -83,62 +84,62 @@
 
             <div class="form-group">
                 {!! Form::label('employee_id', 'Employee', ['class'=> 'col-sm-2 control-label']) !!}
-                {!! Form::select('employee_id', $employees, Input::old('employee_id'), array('class' => 'form-control')) !!}
+                {!! Form::select('employee_id', $employees, $salary_sheet_record->employee_id, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('basic_salary', 'Basic Salary') !!}
-                {!! Form::text('basic_salary', Input::old('basic_salary'), array('class' => 'form-control')) !!}
+                {!! Form::text('basic_salary', $salary_sheet_record->basic_salary, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('allowance', 'Allowance') !!}
-                {!! Form::text('allowance', Input::old('allowance'), array('class' => 'form-control')) !!}
+                {!! Form::text('allowance', $salary_sheet_record->allowance, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('conveyance', 'Conveyance') !!}
-                {!! Form::text('conveyance', Input::old('conveyance'), array('class' => 'form-control')) !!}
+                {!! Form::text('conveyance', $salary_sheet_record->conveyance, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('gross_salary', 'Gross Salary') !!}
-                {!! Form::text('gross_salary', Input::old('gross_salary'), array('class' => 'form-control')) !!}
+                {!! Form::text('gross_salary', $salary_sheet_record->gross_salary, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('total_advance', 'Total Advance') !!}
-                {!! Form::text('total_advance', Input::old('total_advance'), array('class' => 'form-control')) !!}
+                {!! Form::text('total_advance', $salary_sheet_record->total_advance, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('previous_advance_balance', 'Previous Advance Balance') !!}
-                {!! Form::text('previous_advance_balance', Input::old('previous_advance_balance'), array('class' => 'form-control')) !!}
+                {!! Form::text('previous_advance_balance', $salary_sheet_record->previous_advance_balance, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('deduction_this_month', 'Deduction this Month') !!}
-                {!! Form::text('deduction_this_month', Input::old('deduction_this_month'), array('class' => 'form-control')) !!}
+                {!! Form::text('deduction_this_month', $salary_sheet_record->deduction_this_month, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('rest_advance', 'Rest Advance') !!}
-                {!! Form::text('rest_advance', Input::old('rest_advance'), array('class' => 'form-control')) !!}
+                {!! Form::text('rest_advance', $salary_sheet_record->rest_advance, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('net_payable', 'Net Payable') !!}
-                {!! Form::text('net_payable', Input::old('net_payable'), array('class' => 'form-control')) !!}
+                {!! Form::text('net_payable', $salary_sheet_record->net_payable, array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('paid', 'Status') !!}
-                {!! Form::select('paid', array('1' => 'Paid', '0' => 'Unpaid'), '1', array('class' => 'form-control')) !!}
+                {!! Form::select('paid', array('1' => 'Paid', '0' => 'Unpaid'), $salary_sheet_record->paid , array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('pay_date', 'Pay Date') !!}
-                {!! Form::input('date', 'pay_date', Carbon\Carbon::now()->format('Y-m-d') , array('class' => 'form-control')) !!}
+                {!! Form::input('date', 'pay_date', $salary_sheet_record->pay_date , array('class' => 'form-control')) !!}
 
             </div>
 

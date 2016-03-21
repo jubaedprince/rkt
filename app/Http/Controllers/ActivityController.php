@@ -148,10 +148,12 @@ class ActivityController extends Controller
 
 //        $activities = Activity::orderBy('created_at', 'desc')->get();
 
-        $activities = Activity::all()->groupBy(function($item){ return $item->date->format('d-M-y'); })->reverse();
+        $activities = Activity::getActivityOfOneMonth($request->month,$request->year)->sortBy('date')->groupBy(function($item){ return $item->date->format('d'); });
+
+//        $activities = Activity::all()->sortBy('car_id')->groupBy(function($item){ return $item->date->format('d-M-y'); })->reverse();
 
 //        dd($activities);
 
-        return view('activity.list', ['activities' => $activities]);
+        return view('activity.list', compact('activities', 'request'));
     }
 }

@@ -213,11 +213,16 @@ Route::group(['middleware' => 'auth'], function () {
     //report
     Route::group(['prefix' => 'hr'], function () {
 
-        Route::get('/profile', [
-            'as' => 'hr-profile', 'uses' => 'HRController@profile'
-        ]);
-
         Route::resource('employee', 'EmployeeController', []);
+
+        Route::get('/employee/{employee}/attachment/create', ['uses' => 'AttachmentController@create']);
+        Route::post('/employee/{employee}/attachment', ['uses' => 'AttachmentController@store']);
+        Route::get('/employee/{employee}/attachment/{attachment}/delete', ['uses' => 'AttachmentController@destroy']);
+
+        Route::resource('salary_sheet', 'SalarySheetController', []);
+
+        Route::resource('salary_sheet.salary_sheet_records', 'SalarySheetSalarySheetRecordsController');
+
 
     });
 

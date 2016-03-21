@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 @section('content')
     <div class="col-md-8" style="background-color: #dedef8; border-radius:5px; padding: 20px">
@@ -49,12 +50,12 @@
                 </div>
             @endforeach
 
-        <div class="form-group">
-            {!! Form::label('type', 'Type', ['class'=> 'col-sm-2 control-label']) !!}
-            <div class="col-sm-11">
-                {!! Form::select('type', ['1'=>'Import' , '0' => 'Export', '2' => 'Other'],  $activity->onday->type, array('class' => 'form-control')) !!}
+            <div class="form-group">
+                {!! Form::label('type', 'Type', ['class'=> 'col-sm-2 control-label']) !!}
+                <div class="col-sm-11">
+                    {!! Form::select('type', ['1'=>'Import' , '0' => 'Export', '2' => 'Other'],  $activity->onday->type, array('class' => 'form-control')) !!}
+                </div>
             </div>
-        </div>
 
             <div class="form-group">
                 {!! Form::label('customer', 'Customer', ['class'=> 'col-sm-2 control-label']) !!}
@@ -144,7 +145,7 @@
             @endif
 
 
-            {{--Maintenance form --}}
+            Maintenance form
             <div class="form-group">
                 {!! Form::label('comment', 'Comment') !!}
                 {!! Form::textArea('comment', $activity->comment, array('class' => 'form-control')) !!}
@@ -155,7 +156,7 @@
 
             {!! Form::close() !!}
 
-            {{--add item form--}}
+            add item form
             {!! Form::open(array('url' => 'process/maintenance/item', 'method' => 'post')) !!}
             {!! Form::hidden('maintenance_id', $activity->maintenance->id) !!}
 
@@ -173,7 +174,7 @@
             {!! Form::close() !!}
 
 
-            {{--Add item name form --}}
+            Add item name form
             {!! Form::open(array('url' => '/process/maintenance/item-name', 'method' => 'post')) !!}
             {!! Form::hidden('maintenance_id', $activity->maintenance->id) !!}
 

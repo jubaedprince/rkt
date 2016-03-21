@@ -1,21 +1,18 @@
 @extends('layouts.master')
+
 @section('content')
-    <h1>{{$date}}</h1>
-    {{--<div>--}}
-    {{--<a href="#" class="btn btn-primary btn-lg" role="button">View</a>--}}
-    {{--<a href="#" class="btn btn-primary btn-lg" role="button">Generate</a>--}}
-    {{--</div>--}}
-    <div>
+    <div class="col-md-4"></div>
+    <div class="alert alert-info col-md-4" style="text-align: center">
+        <h4 style="text-align: center">{{$date}}</h4>
+
         @if($rate>0)
             Rate Change: <br>
             ▲ {{abs(round($rate,2))}} %
         @else
-            Rate Change:<br>
+            Rate Change:
             ▼ {{abs(round($rate,2))}} %
         @endif
     </div>
-
-
 
     {{--<script type="text/javascript" src="{{ URL::asset('components/js/Chart.min.js') }}"></script>--}}
     <script type="text/javascript" src="{{ URL::asset('components/js/ChartNew.js') }}"></script>
@@ -23,15 +20,15 @@
 
 
     {{--<div style="margin-left:300px; height:620px; width:520px; border: 1px solid #add8e6; padding: 10px; ">--}}
-        {{--<div id="my-doughnut-legend"></div>--}}
-        {{--<canvas id="myChart" width="500" height="500"></canvas>--}}
+    {{--<div id="my-doughnut-legend"></div>--}}
+    {{--<canvas id="myChart" width="500" height="500"></canvas>--}}
     {{--</div>--}}
 
 
 
     <style>
         #my-doughnut-legend{
-            float: right;
+            float: center;
         }
 
         #my-doughnut-legend ul {
@@ -85,27 +82,27 @@
             labels: {!! json_encode($dates) !!},
             graphTitle : "Sinus - Cosinus",
             datasets : [
-            {
-                label: "RKT Fare",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data:   {!! json_encode($fare) !!}
-        },
-        {
-            label: "Market Fare",
+                {
+                    label: "RKT Fare",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data:   {!! json_encode($fare) !!}
+                },
+                {
+                    label: "Market Fare",
                     fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: {!! json_encode($market_rate) !!}
-             }
-          ]
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: {!! json_encode($market_rate) !!}
+                }
+            ]
         }
 
 
@@ -126,7 +123,11 @@
 
 
     </script>
-    <canvas id="canvas" height="500" width="1000"></canvas>
+
+    <div align="center">
+        <canvas id="canvas" height="444px" width="1111px"></canvas>
+    </div>
+
     <script>
         window.onload = function() {
             new Chart(document.getElementById("canvas").getContext("2d")).Line(linedata, opt1
