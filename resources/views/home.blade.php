@@ -3,8 +3,6 @@
 @section('title', 'Home')
 
 @section('content')
-    {{--<p>This is my home content.</p>--}}
-    {{--<p>Route name: {!!Route::currentRouteName()!!}</p>--}}
     @if(Auth::user()->isAdmin() || Auth::user()->isUser())
         @if (Route::currentRouteName() === 'home')
             @include('forms.activity', ['cars' => $cars])
@@ -23,7 +21,7 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5>Transaction table</h5>
+            <h5>Last 10 Activities</h5>
         </div>
         <div class="ibox-content">
             <table class="table table-striped table-bordered table-hover dataTables-example" >
@@ -62,6 +60,7 @@
                             <td>{{ $activity->onday->location_origin->name }}</td>
                             <td>{{ $activity->onday->location_destination->name }}</td>
                         @else  <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+
                         @endif
 
                         @if(Auth::user()->isAdmin())
@@ -79,6 +78,7 @@
                                 </a>
                             </td>
                         @endif
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -86,9 +86,4 @@
         </div>
     </div>
 @endsection
-
-
-
-
-
 

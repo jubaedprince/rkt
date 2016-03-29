@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
@@ -88,6 +89,15 @@ class Activity extends Model
             return 0;
         }
         else return "";
+    }
+
+    public static function getActivityOfOneMonth($month, $year){
+        $date = Carbon::create($year, $month, 1, 0);
+        $initial_date = $date->toDateString();
+        $last_date =  $date->addMonth()->subDay()->toDateString();
+        $trucks = Car::lists('name');
+        $activities = Activity::where('date', '>=', $initial_date)->where('date', '<=', $last_date)->get();
+        return $activities;
     }
 
 }

@@ -79,14 +79,16 @@ class ActivityController extends Controller
 
             //adding onday other costs
             $other_cost = $request->input('other_cost');
-            foreach ($other_cost as $key => $value){
-                $onday_other_cost = OndayOtherCost::where('onday_id', $onday->id)->where('onday_other_cost_item_id', $key)->first();
-                $temp = $onday_other_cost->cost;
-                $onday_other_cost->cost = $value;
-                $onday->cost =  $onday->cost - $temp;
-                $onday->cost =  $onday->cost + $value;
-                $onday_other_cost->save();
-                $onday->save();
+            if($other_cost != null){
+                foreach ($other_cost as $key => $value){
+                    $onday_other_cost = OndayOtherCost::where('onday_id', $onday->id)->where('onday_other_cost_item_id', $key)->first();
+                    $temp = $onday_other_cost->cost;
+                    $onday_other_cost->cost = $value;
+                    $onday->cost =  $onday->cost - $temp;
+                    $onday->cost =  $onday->cost + $value;
+                    $onday_other_cost->save();
+                    $onday->save();
+                }
             }
 
             return redirect()->route('home');
@@ -146,10 +148,12 @@ class ActivityController extends Controller
 
 //        $activities = Activity::orderBy('created_at', 'desc')->get();
 
-        $activities = Activity::all()->groupBy(function($item){ return $item->date->format('d-M-y'); })->reverse();
+        $activities = Activity::getActivityOfOneMonth($request->month,$request->year)->sortBy('date')->groupBy(function($item){ return $item->date->format('d'); });
+
+//        $activities = Activity::all()->sortBy('car_id')->groupBy(function($item){ return $item->date->format('d-M-y'); })->reverse();
 
 //        dd($activities);
 
-        return view('activity.list', ['activities' => $activities]);
+        return view('activity.list', compact('activities', 'request'));
     }
 }

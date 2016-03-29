@@ -5,9 +5,12 @@
  *   Copyright 2014 Webapplayers.com
  *
 */
+<<<<<<< HEAD
 
 .js div#preloader { position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; }
 
+=======
+>>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
 h1,
 h2,
 h3,
