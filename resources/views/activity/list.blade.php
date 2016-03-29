@@ -1,40 +1,33 @@
 @extends('layouts.master')
+
+@section('title', 'Activity List')
+
 @section('content')
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Truck</th>
-                <th>Cost</th>
-                <th>Fare</th>
-                <th>Type</th>
-                <th>Customer</th>
-                <th>Market Price</th>
-                <th>Type</th>
-                <th>Origin</th>
-                <th>Destination</th>
-                <th>Action</th>
-                <th>Option</th>
-            </tr>
-            </thead>
-            <tbody>
 
-            @foreach ($activities as $key => $activities)
+@foreach ($activities as $key => $activities)
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>{{$key}}</h5>
+        </div>
+        <div class="ibox-content">
+            <table class="table table-striped table-bordered table-hover dataTables-example" >
                 <thead>
-                <tr style="background-color: #10e8d5"> <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th style="color: #187c86">{{$key}}</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th></tr>
+                    <tr>
+                        <th>Truck</th>
+                        <th>Cost</th>
+                        <th>Fare</th>
+                        <th>Type</th>
+                        <th>Customer</th>
+                        <th>Market Price</th>
+                        <th>Type</th>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Action</th>
+                        <th>Option</th>
+                    </tr>
                 </thead>
-
-                @foreach ($activities as $activity)
+                <tbody> 
+                    @foreach ($activities as $activity)
                     <tr>
                         <td>{{ $activity->car->name }}</td>
                         <td>৳ {!!number_format(floatval($activity->cost)) !!}</td>
@@ -56,13 +49,13 @@
                         @if(Auth::user()->isAdmin())
                             <td>
                                 <a href="/activity/{{ $activity->id }}/delete">
-                                    <button type="button" class="btn btn-default" aria-label="Remove">
+                                    <button type="button" class="btn btn-default btn-delete" aria-label="Remove">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </button>
                                 </a>
 
                                 <a href="/activity/{{ $activity->id }}/edit">
-                                    <button type="button" class="btn btn-default" aria-label="Edit">
+                                    <button type="button" class="btn btn-default btn-edit" aria-label="Edit">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </button>
                                 </a>
@@ -76,9 +69,11 @@
                             @endif
                         </td>
                     </tr>
-                @endforeach
-            @endforeach
-            </tbody>
-        </table>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+@endforeach
+
 @endsection

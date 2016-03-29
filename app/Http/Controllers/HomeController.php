@@ -28,7 +28,7 @@ use App\OndayOtherCostItem;
 use DB;
 use Session;
 use Input;
-
+use Carbon;
 class HomeController extends Controller {
     public function showHome(){
         Session::forget('maintenance');
@@ -48,7 +48,9 @@ class HomeController extends Controller {
         $type = $request->input('type');
 
         $activity = new Activity;
-        $activity->date = $date;
+        $carbon_date = Carbon\Carbon::createFromFormat('m/d/Y', $date);
+        // dd($carbon_date->format('Y-m-d'));
+        $activity->date = $carbon_date->format('Y-m-d');
         $activity->car_id = $car_id;
         $activity->save();
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();

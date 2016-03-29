@@ -49,7 +49,7 @@ Route::get('/status/', function () {
    // dd($response);
 
 
-   $response = $client->get('http://vts.m2mbd.com/group/vehicle_state.php');
+    $response = $client->get('http://vts.m2mbd.com/group/vehicle_state.php');
     $code = $response->getStatusCode();
     $body = $response->getBody();
     while (!$body->eof()) {

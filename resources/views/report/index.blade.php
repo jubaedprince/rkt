@@ -1,6 +1,10 @@
 @extends('layouts.master')
+
 @section('content')
-    <h1>{{$date}}</h1>
+    <div class="col-md-4"></div>
+    <div class="alert alert-info col-md-4" style="text-align: center">
+        <h4 style="text-align: center">{{$date}}</h4>
+    </div>
     <script type="text/javascript" src="{{ URL::asset('components/js/ChartNew.js') }}"></script>
     <br><br>
 
@@ -101,7 +105,17 @@
 
 
     </script>
-    <canvas id="canvas" height="500" width="1000"></canvas>
+    
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div>
+                    <canvas id="canvas" width="1000px" height="444px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         window.onload = function() {
             new Chart(document.getElementById("canvas").getContext("2d")).Bar(linedata, opt1
