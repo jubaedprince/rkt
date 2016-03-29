@@ -18,7 +18,6 @@ $(document).ready(function () {
         }, 50);
     });
 
-<<<<<<< HEAD
     $(window).load(function(){
         $('#preloader').fadeOut(1111,function(){$(this).remove();});
     });
@@ -43,8 +42,6 @@ $(document).ready(function () {
         $(this).addClass('btn-default');
     });
 
-=======
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
     // Close ibox function
     $('.close-link').click( function() {
         var content = $(this).closest('div.ibox');

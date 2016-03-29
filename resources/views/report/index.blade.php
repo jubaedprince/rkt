@@ -1,83 +1,60 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="col-md-4"></div>
-    <div class="alert alert-info col-md-4" style="text-align: center">
-        <h4 style="text-align: center">{{$date}}</h4>
-    </div>
-<<<<<<< HEAD
-    <script type="text/javascript" src="{{ URL::asset('components/js/ChartNew.js') }}"></script>
-=======
+    <div class="row">
+        <div class="col-md-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Generate Fare Comparison Report Form</h5>
+                </div>
+                <div class="ibox-content" align="center">
+                    {!! Form::open(array('url' => 'report/price-comparison', 'method' => 'post' , 'class' => 'form-group')) !!}
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    <div class="form-group col-md-12">
+                        <label class="font-noraml">Select Month</label>
+                        <div class="input-group">
+                            {!! Form::select('month',['1'=>'January', '2'=>'February', '3'=>'March', '4'=>'April', '5'=>'May', '6'=>'June', '7'=>'July', '8'=>'August', '9'=>'September', '10'=>'October', '11'=>'November', '12'=>'Dec'], Carbon\Carbon::now()->format('m'), array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
+                        </div>
+                    </div>
 
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
-    <br><br>
+                    <div class="form-group col-md-12">
+                        <label class="font-noraml">Select Year</label>
+                        <div class="input-group">
+                            {!! Form::select('year', ['2014' => '2014', '2015' => '2015', '2016' => '2016'  ],  Carbon\Carbon::now()->format('Y'), array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        {!! Form::submit('Submit', ['class' => 'btn btn-primary btn-block']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-content">
-                <div>
-                    <canvas id="canvas" width="1000px" height="444px"></canvas>
+        <div class="col-md-8">
+            <div class="ibox-title">
+                <h5>Cost and Revenue Comparison</h5>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <canvas id="canvas" width="701%" height="444px"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
-
-@endsection
-
 <script type="text/javascript" src="{{ URL::asset('components/js/ChartNew.js') }}"></script>
-<style>
-    #my-doughnut-legend{
-        float: right;
-    }
 
-    #my-doughnut-legend ul {
-        list-style-type: none;
-        width:200px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background: white;
-        /*border:1px solid black;*/
-    }
-
-    #my-doughnut-legend li span {
-        display: block;
-        width: 14px;
-        height: 14px;
-        border-radius: 7px;
-        float: left;
-        margin-top: 4px;
-        margin-right: 8px;
-    }
-
-    #my-doughnut-legend {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        font-size: 14px;
-        margin-top : 20px;
-
-    }
-
-    #my-doughnut-legend li {
-        margin-bottom : 4px;
-    }
-
-    #my-doughnut-legend li:first-letter {
-        text-transform: capitalize;
-    }
-
-    .comm-how {
-        display: inline-block;
-        float : left;
-        color : #979797;
-        width : 25px;
-        text-align: right;
-        margin-right : 10px;
-    }
-
-</style>
 <script>
     var linedata = {
         labels: {!! json_encode($trucks) !!},
@@ -115,29 +92,12 @@
             canvasBordersColor : "black",
             datasetFill : false,
             legend : true,
-            graphTitle : "Cost and Revenue Comparison",
             graphTitleFontSize: 18,
             bezierCurve: false
 
 
         }
-
-
     </script>
-<<<<<<< HEAD
-    
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-content">
-                <div>
-                    <canvas id="canvas" width="1000px" height="444px"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-=======
-
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
 
     <script>
         window.onload = function() {
@@ -145,3 +105,4 @@
             );
         }
     </script>
+@endsection

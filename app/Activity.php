@@ -41,7 +41,7 @@ class Activity extends Model
         }
 
         else if ($this->nil){
-            return "Nil";
+            return "Off Day";
         }
         else return "";
     }

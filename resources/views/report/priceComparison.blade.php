@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-<<<<<<< HEAD
 @section('title', 'Fare comparison graph')
 
 @section('content')
@@ -24,14 +23,14 @@
                     <div class="form-group col-md-12">
                         <label class="font-noraml">Select Month</label>
                         <div class="input-group">
-                            {!! Form::select('month',['1'=>'Jan', '2'=>'Feb', '3'=>'Mar', '4'=>'Apr', '5'=>'May', '6'=>'Jun', '7'=>'Jul', '8'=>'Aug', '9'=>'Sep', '10'=>'Oct', '11'=>'Nov', '12'=>'Dec'], 8, array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
+                            {!! Form::select('month',['1'=>'January', '2'=>'February', '3'=>'March', '4'=>'April', '5'=>'May', '6'=>'June', '7'=>'July', '8'=>'August', '9'=>'September', '10'=>'October', '11'=>'November', '12'=>'Decembers'], Carbon\Carbon::now()->format('m'), array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
                         </div>
                     </div>
 
                     <div class="form-group col-md-12">
                         <label class="font-noraml">Select Year</label>
                         <div class="input-group">
-                            {!! Form::select('year', ['2014' => '2014', '2015' => '2015', '2016' => '2016'  ], 2015, array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
+                            {!! Form::select('year', ['2014' => '2014', '2015' => '2015', '2016' => '2016'  ],  Carbon\Carbon::now()->format('Y'), array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
                         </div>
                     </div>
 
@@ -49,7 +48,7 @@
                     <h5>{{$date}} |
                     @if($rate>0)
                             Rate Change: <br>
-                        <text style="color: blue">▲</text> {{abs(round($rate,2))}} %
+                        <text style="color: green">▲</text> {{abs(round($rate,2))}} %
                     @else
                             Rate Change:
                         <text style="color: red">▼</text> {{abs(round($rate,2))}} %
@@ -64,117 +63,13 @@
         </div>
     </div>
 
-    
-
-=======
-@section('content')
-    <div class="col-md-4"></div>
-    <div class="alert alert-info col-md-4" style="text-align: center">
-        <h4 style="text-align: center">{{$date}}</h4>
-
-        @if($rate>0)
-            Rate Change: <br>
-            ▲ {{abs(round($rate,2))}} %
-        @else
-            Rate Change:
-            ▼ {{abs(round($rate,2))}} %
-        @endif
-    </div>
-
-    {{--<script type="text/javascript" src="{{ URL::asset('components/js/Chart.min.js') }}"></script>--}}
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
     <script type="text/javascript" src="{{ URL::asset('components/js/ChartNew.js') }}"></script>
 
-<<<<<<< HEAD
-=======
-    {{--<div style="margin-left:300px; height:620px; width:520px; border: 1px solid #add8e6; padding: 10px; ">--}}
-    {{--<div id="my-doughnut-legend"></div>--}}
-    {{--<canvas id="myChart" width="500" height="500"></canvas>--}}
-    {{--</div>--}}
-
-
-
-    <style>
-        #my-doughnut-legend{
-            float: center;
-        }
-
-        #my-doughnut-legend ul {
-            list-style-type: none;
-            width:200px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            background: white;
-            /*border:1px solid black;*/
-        }
-
-        #my-doughnut-legend li span {
-            display: block;
-            width: 14px;
-            height: 14px;
-            border-radius: 7px;
-            float: left;
-            margin-top: 4px;
-            margin-right: 8px;
-        }
-
-        #my-doughnut-legend {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            font-size: 14px;
-            margin-top : 20px;
-
-        }
-
-        #my-doughnut-legend li {
-            margin-bottom : 4px;
-        }
-
-        #my-doughnut-legend li:first-letter {
-            text-transform: capitalize;
-        }
-
-        .comm-how {
-            display: inline-block;
-            float : left;
-            color : #979797;
-            width : 25px;
-            text-align: right;
-            margin-right : 10px;
-        }
-
-    </style>
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
     <script>
         var linedata = {
             labels: {!! json_encode($dates) !!},
             graphTitle : "Sinus - Cosinus",
             datasets : [
-<<<<<<< HEAD
-            {
-                label: "RKT Fare",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data:   {!! json_encode($fare) !!}
-        },
-
-        {
-            label: "Market Fare",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: {!! json_encode($market_rate) !!}
-             }
-          ]
-=======
                 {
                     label: "RKT Fare",
                     fillColor: "rgba(220,220,220,0.2)",
@@ -196,7 +91,6 @@
                     data: {!! json_encode($market_rate) !!}
                 }
             ]
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
         }
 
         var opt1 = {
@@ -213,13 +107,6 @@
         }
     </script>
 
-<<<<<<< HEAD
-=======
-    <div align="center">
-        <canvas id="canvas" height="444px" width="1111px"></canvas>
-    </div>
-
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
     <script>
         window.onload = function() {
             new Chart(document.getElementById("canvas").getContext("2d")).Line(linedata, opt1);

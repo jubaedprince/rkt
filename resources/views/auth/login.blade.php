@@ -4,11 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-<<<<<<< HEAD
     <title>Rubaiyat Kamal Transport - @yield('title')</title>
-=======
-    <title>Rubaiyat Kamal Transport</title>
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +25,6 @@
 <body class="gray-bg">
     <div class="loginColumns animated fadeInDown">
         <div class="row">
-<<<<<<< HEAD
             <div class="col-md-2"></div>
             <div class="col-md-8" align="center">
                 <h2 class="font-bold">Welcome to Rubaiyat Kamal Transport</h2>
@@ -77,50 +72,6 @@
             </div>
             <div class="col-md-4 text-right">
                <small>&copy; 2016 - 2017</small>
-=======
-            <div class="col-md-6" align="center">
-                <h2 class="font-bold">Welcome to Rubaiyat Kamal Transport</h2>
-                <p>Employee Login</p>
-            </div>
-            <div class="col-md-6">
-                <div class="ibox-content">
-                    <form class="m-t" role="form" method="POST" action="/auth/login">
-                    {!! csrf_field() !!}
-
-                    @if (count($errors) > 0)
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-warning">
-                                <a class="close" data-dismiss="alert" href="#" aria-hidden="true">×</a>
-                                <p style="text-align: center; color: black">{{ $error }}</p>
-                            </div>
-                        @endforeach
-                    @endif
-                        <div class="form-group">
-                            <input autofocus type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Type your Email" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Type your Password" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-                        <!-- <a href="#">
-                            <small>Forgot password?</small>
-                        </a> -->
-                        <p class="text-muted text-center">
-                            <small>Do not have an account?</small>
-                        </p>
-                        <a class="btn btn-sm btn-white btn-block" href="/auth/register">Create an account</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-md-6">
-                Rubaiyat Kamal Transport
-            </div>
-            <div class="col-md-6 text-right">
-               <small>&nbsp; 2016-2017</small>
->>>>>>> ba38af57468d93813d9c6f7a655537cce4f5374d
             </div>
         </div>
     </div>

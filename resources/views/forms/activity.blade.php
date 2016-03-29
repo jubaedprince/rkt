@@ -19,7 +19,7 @@
                 <span class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </span>
-                <input name="date" type="text" class="form-control" value="03/04/2016">
+                <input name="date" type="text" class="form-control" value="{{Carbon\Carbon::now()->format('m/d/Y')}}">
             </div>
         </div>
 

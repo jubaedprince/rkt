@@ -65,15 +65,15 @@
 
                         @if(Auth::user()->isAdmin())
                             <td>
-                                <a href="/activity/{{ $activity->id }}/delete">
-                                    <button type="button" class="btn btn-default btn-delete" aria-label="Remove">
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                    </button>
-                                </a>
-
                                 <a href="/activity/{{ $activity->id }}/edit">
                                     <button id="edit_btn" type="button" class="btn btn-default btn-edit" aria-label="Edit">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+                                
+                                <a href="/activity/{{ $activity->id }}/delete">
+                                    <button type="button" class="btn btn-default btn-delete" aria-label="Remove">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </button>
                                 </a>
                             </td>
