@@ -148,7 +148,7 @@
                 </div>
                 
                 <div class="row wrapper border-bottom white-bg page-heading">
-                    <div class="col-sm-4" style="font-size: 17px; margin-top: 17px">
+                    <div class="col-sm-4" style="font-size: 13px; margin-top: 17px">
                         @yield('breadcrumb')
                     </div>
                 </div>

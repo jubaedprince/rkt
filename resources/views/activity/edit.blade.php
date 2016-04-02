@@ -168,25 +168,6 @@
                     </div>
                     @endif
 
-                    <div class="row">
-                        <div class="form-group">
-                            {!! Form::label('comment', 'Comment', ['class'=> 'col-sm-2 control-label']) !!}
-                            <div class="col-md-12">
-                                {!! Form::textArea('comment', $activity->comment, array('class' => 'form-control')) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            {!! Form::submit('Update', ['class' => 'btn btn-primary pull-right']) !!}  
-                        </div>
-                    </div>
-
-                    {!! Form::close() !!}
-
-                    <hr>
-
                     {!! Form::open(array('url' => 'process/maintenance/item', 'method' => 'post')) !!}
                     {!! Form::hidden('maintenance_id', $activity->maintenance->id) !!}
 
@@ -211,6 +192,25 @@
                             {!! Form::submit('Edit item', ['class' => 'btn btn-primary pull-right']) !!}
                         </div>
                     </div> 
+                    {!! Form::close() !!}
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="form-group">
+                            {!! Form::label('comment', 'Comment', ['class'=> 'col-sm-2 control-label']) !!}
+                            <div class="col-md-12">
+                                {!! Form::textArea('comment', $activity->comment, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {!! Form::submit('Update', ['class' => 'btn btn-primary pull-right']) !!}  
+                        </div>
+                    </div>
+
                     {!! Form::close() !!}
 
                     <hr>

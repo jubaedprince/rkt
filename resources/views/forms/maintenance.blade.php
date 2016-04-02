@@ -1,12 +1,3 @@
-@section('breadcrumb')
-<ol class="breadcrumb">
-    <li class="active">
-        <strong>MMM</strong>
-    </li>
-</ol>
-@endsection
-
-
 <div class="row">
     <div class="col-lg-6">
         <div class="ibox float-e-margins">
@@ -76,11 +67,29 @@
     <div class="col-lg-6">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Item cost list</h5>
+                <h5>Item cost table</h5>
             </div>
             <div class="ibox-content">
-                <!-- @if(count($costs) > 0) -->
-                <table class="table table-striped table-bordered table-hover dataTables-example">
+                @if(count($costs) < 0)
+                 <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cost</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                @else
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>Item</th>
@@ -105,7 +114,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <!-- @endif -->
+                @endif
                 <br>
                 <h4>Total Cost: ৳ {!!number_format(floatval(App\Activity::find($activity->id)->maintenance->cost)) !!}</h4>
             </div>

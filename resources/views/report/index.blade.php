@@ -1,11 +1,19 @@
 @extends('layouts.master')
 
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Monthly cost-revenue</strong>
+    </li>
+</ol>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Generate Fare Comparison Report Form</h5>
+                    <h5>Generate monthly cost-revenue graph</h5>
                 </div>
                 <div class="ibox-content" align="center">
                     {!! Form::open(array('url' => 'report/price-comparison', 'method' => 'post' , 'class' => 'form-group')) !!}
@@ -42,7 +50,7 @@
 
         <div class="col-md-8">
             <div class="ibox-title">
-                <h5>Cost and Revenue Comparison</h5>
+                <h5>{{$date}} | Cost and Revenue Comparison</h5>
             </div>
 
             <div class="ibox float-e-margins">
@@ -92,10 +100,9 @@
             canvasBordersColor : "black",
             datasetFill : false,
             legend : true,
+            graphTitle : "RKT Monthly Cost Revenue Comparison",
             graphTitleFontSize: 18,
             bezierCurve: false
-
-
         }
     </script>
 
