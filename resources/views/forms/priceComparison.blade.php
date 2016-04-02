@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Fare comparison')
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Fare comparison</strong>
+    </li>
+</ol>
+@endsection
 
 @section('content')
     

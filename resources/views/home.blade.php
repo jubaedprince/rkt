@@ -1,6 +1,49 @@
 @extends('layouts.master')
 
-@section('title', 'Home')
+@section('breadcrumb')
+ @if(Auth::user()->isAdmin() || Auth::user()->isUser())
+        @if (Route::currentRouteName() === 'home')
+            <ol class="breadcrumb">
+                <li class="active">
+                    <strong>Home</strong>
+                </li>
+            </ol>
+
+        @elseif (Route::currentRouteName() === 'process.ondayForm')
+             <ol class="breadcrumb">
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+                <li class="active">
+                    <strong>On Day</strong>
+                </li>
+            </ol>
+
+        @elseif (Route::currentRouteName() === 'process.maintenanceForm')
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Maintainance</strong>
+                </li>
+            </ol>
+
+        @elseif (Route::currentRouteName() === 'process.nilForm')
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Off Day</strong>
+                </li>
+            </ol>
+
+        @endif
+    @endif
+
+
+@endsection
 
 @section('content')
     @if(Auth::user()->isAdmin() || Auth::user()->isUser())
@@ -19,12 +62,15 @@
         @endif
     @endif
 
+
+    
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>Last 10 Activities</h5>
         </div>
+
         <div class="ibox-content">
-            <table class="table table-striped table-bordered table-hover dataTables-example" >
+            <table id="example" class="table table-striped table-bordered table-hover dataTables-example" >
                 <thead>
                     <tr>
                         <th>Truck</th>
@@ -41,6 +87,7 @@
                     </tr>
                 </thead>
                 <tbody> 
+                    <!-- orderBy('name', 'desc') -->
                     @foreach ($activities as $activity)
                     <tr>
                         <td>{{ $activity->car->name }}</td>
@@ -85,7 +132,7 @@
             </table>
         </div>
     </div>
-
+  
     <script>
 
         function areYouSureYouWantToDelete(activity_id){
@@ -106,5 +153,6 @@
         }
        
     </script>
+
 @endsection
 

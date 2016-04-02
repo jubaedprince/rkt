@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
-@section('title' , 'Salary Sheet')
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Salary Sheet</strong>
+    </li>
+</ol>
+@endsection
+
 
 @section('content')
     <div class="row">

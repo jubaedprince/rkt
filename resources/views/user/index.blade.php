@@ -1,6 +1,14 @@
 @extends('layouts.master')
 
-@section('title', 'User')
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Users</strong>
+    </li>
+</ol>
+@endsection
+
+  
 
 @section('content')
     @if(count($unapproved_users )>0)
@@ -74,11 +82,11 @@
                                 <td>@if($user->type == null) viewer @else {{$user->type}}@endif</td>
 
                                 <td>
-                                    <a href="/users/reject/{{$user->id}}">
-                                        <button type="button" class="btn btn-danger btn-sm" aria-label="Remove">
+                                    <!-- <a href="/users/reject/{{$user->id}}"> -->
+                                        <button type="button" onclick="areYouSureYouWantToDelete({{$user->id}})" class="btn btn-danger btn-sm" aria-label="Remove">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
-                                    </a>
+                                    <!-- </a> -->
                                 </td>
 
                             </tr>
@@ -88,4 +96,25 @@
             </div>
         </div> 
     @endif
+
+    <script>
+
+        function areYouSureYouWantToDelete(user_id){
+
+             swal({
+              title: "Are you sure?",
+              text: "You will not be able to recover this action!",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes, delete it!",
+              closeOnConfirm: false
+            },
+            function(){
+              swal("Deleted!", "Your user is rejected.", "success");
+               window.location.href = "/users/reject/" + user_id;
+            });
+        }
+       
+    </script>
 @endsection

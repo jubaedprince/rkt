@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Monthly Cost Revenue')
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Monthly Cost Revenue</strong>
+    </li>
+</ol>
+@endsection
 
 @section('content')
     

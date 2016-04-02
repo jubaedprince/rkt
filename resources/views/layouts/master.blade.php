@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="/assets/js/jquery-2.1.1.js"></script>    
 
     <link rel='shortcut icon' href='/uploads/rkt.png' type='image/png'/ >
 
@@ -148,14 +149,7 @@
                 
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-sm-4" style="font-size: 17px; margin-top: 17px">
-                        <ol class="breadcrumb">
-                            <li>
-                                <a href="/home">Home</a>
-                            </li>
-                            <li class="active">
-                                <strong>@yield('title')</strong>
-                            </li>
-                        </ol>
+                        @yield('breadcrumb')
                     </div>
                 </div>
                 
@@ -175,7 +169,7 @@
         </div>
 
         <!-- Mainly scripts -->
-        <script src="/assets/js/jquery-2.1.1.js"></script>
+      
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
         <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -201,7 +195,8 @@
             $(document).ready(function() {
                 $('.dataTables-example').dataTable({
                     "responsive": true,
-                    "bPaginate": false
+                    "bPaginate": false,
+                    "order": [[ 1, "desc" ]]
                 });
                 $('#data_1 .input-group.date').datepicker({
                     todayBtn: "linked",

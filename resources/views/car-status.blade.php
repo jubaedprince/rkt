@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Car Status')
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Car Status</strong>
+    </li>
+</ol>
+@endsection
+
 
 @section('content')
     {!!$body!!}

@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Edit activity list')
+
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>Edit activity list</strong>
+    </li>
+</ol>
+@endsection
 
 @section('content')
 <div class="row">

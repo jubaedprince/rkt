@@ -1,3 +1,12 @@
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="active">
+        <strong>MMM</strong>
+    </li>
+</ol>
+@endsection
+
+
 <div class="row">
     <div class="col-lg-6">
         <div class="ibox float-e-margins">
