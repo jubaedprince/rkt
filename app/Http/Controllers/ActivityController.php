@@ -141,7 +141,7 @@ class ActivityController extends Controller
         }
 
 
-        return Redirect::to('/home');
+        return redirect()->back();
     }
 
     public function showListView(Request $request){
