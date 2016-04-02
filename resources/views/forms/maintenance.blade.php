@@ -12,22 +12,6 @@
                     </a>
                 </div>
             </div>
-            <div class="ibox-content">
-                {!! Form::open(array('url' => '/process/maintenance/item-name', 'method' => 'post')) !!}
-                {!! Form::hidden('maintenance_id', $maintenance_id) !!}
-
-                <div class="form-group">
-                    {!! Form::label('name', 'Add new item') !!}
-                    {!! Form::text('name', null, array('class' => 'form-control')) !!}
-                </div>
-
-                <div>
-                    <button class="btn btn-sm btn-primary m-t-n-xs" type="submit">
-                        <strong>Add item name</strong>
-                    </button>
-                </div>
-                {!! Form::close() !!}
-            </div>
 
             <div class="ibox-content">
                 {!! Form::open(array('url' => 'process/maintenance/item', 'method' => 'post')) !!}
@@ -86,8 +70,8 @@
                 <h5>Item cost list</h5>
             </div>
             <div class="ibox-content">
-                @if(count($costs) > 0)
-                <table class="table table-striped table-bordered table-hover">
+                <!-- @if(count($costs) > 0) -->
+                <table class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
                         <tr>
                             <th>Item</th>
@@ -112,9 +96,26 @@
                         @endforeach
                     </tbody>
                 </table>
-                @endif
+                <!-- @endif -->
                 <br>
                 <h4>Total Cost: ৳ {!!number_format(floatval(App\Activity::find($activity->id)->maintenance->cost)) !!}</h4>
+            </div>
+
+            <div class="ibox-content">
+                {!! Form::open(array('url' => '/process/maintenance/item-name', 'method' => 'post')) !!}
+                {!! Form::hidden('maintenance_id', $maintenance_id) !!}
+
+                <div class="form-group">
+                    {!! Form::label('name', 'Add new item') !!}
+                    {!! Form::text('name', null, array('class' => 'form-control')) !!}
+                </div>
+
+                <div>
+                    <button class="btn btn-sm btn-primary m-t-n-xs" type="submit">
+                        <strong>Add item name</strong>
+                    </button>
+                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

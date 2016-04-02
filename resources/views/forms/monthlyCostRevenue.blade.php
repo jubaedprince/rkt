@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Fare comparison')
+@section('title', 'Monthly Cost Revenue')
 
 @section('content')
     

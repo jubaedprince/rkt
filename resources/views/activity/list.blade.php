@@ -99,11 +99,11 @@
                                             </button>
                                         </a>
 
-                                        <a href="/activity/{{ $activity->id }}/delete">
-                                            <button type="button" class="btn btn-default btn-delete" aria-label="Remove">
+                                        <!-- <a href="/activity/{{ $activity->id }}/delete"> -->
+                                            <button  onclick="areYouSureYouWantToDelete({{$activity->id}})"  type="button" class="btn btn-default btn-delete" aria-label="Remove">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </button>
-                                        </a>
+                                        <!-- </a> -->
                                     </td>
                                 @endif
                                 <td>
@@ -122,5 +122,26 @@
                 </div>
             </div>
         </div>
+
+         <script>
+
+        function areYouSureYouWantToDelete(activity_id){
+
+             swal({
+              title: "Are you sure?",
+              text: "You will not be able to recover this activity!",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes, delete it!",
+              closeOnConfirm: false
+            },
+            function(){
+              swal("Deleted!", "Your activity has been deleted.", "success");
+               window.location.href = "/activity/" + activity_id + "/delete";
+            });
+        }
+       
+    </script>
     @endforeach
 @endsection

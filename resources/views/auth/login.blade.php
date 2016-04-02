@@ -4,12 +4,14 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-    <title>Rubaiyat Kamal Transport - @yield('title')</title>
+    <title>Rubaiyat Kamal Transport - Login</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <link rel='shortcut icon' href='/uploads/rkt.png' type='image/png'/ >
 
     <!-- Google Font: Open Sans -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">

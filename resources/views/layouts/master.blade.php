@@ -8,9 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel='shortcut icon' href='/uploads/rkt.png' type='image/png'/ >
+
     <!-- Google Font: Open Sans -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700"> -->
 
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -27,6 +29,11 @@
     <link href="/assets/css/animate.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 
+    <!-- Sweet Alert! -->
+
+    <script src="/bower_components/sweetalert-master/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower_components/sweetalert-master/dist/sweetalert.css">
+
 </head>
 
 <div class="js">
@@ -40,7 +47,7 @@
                             <li class="nav-header">
                                 <div class="dropdown profile-element" align="center">
                                     <span>
-                                        <img alt="image" width="42%" class="img-responsive" src="/uploads/20519.jpg" />
+                                        <img alt="image" width="28%" class="img-responsive" src="/uploads/rkt.png" />
                                     </span>
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                         <span class="clear">
@@ -81,7 +88,7 @@
                             </li>
                             <li class="{{ Request::is('car-status') ? 'active' : '' }}">
                                 <a href="/car-status">
-                                    <i class="fa fa-diamond"></i>
+                                    <i class="fa fa-truck"></i>
                                     <span class="nav-label">Car Status</span>
                                 </a>
                             </li>
@@ -101,7 +108,7 @@
 
                                 <li class="{{ Request::is('hr/*') ? 'dropdown active' : 'dropdown' }}">
                                     <a href="#">
-                                        <i class="fa fa-plane"></i>
+                                        <i class="fa fa-users"></i>
                                         <span class="nav-label">HR</span>
                                         <span class="fa fa-angle-right pull-right"></span>
                                     </a>
@@ -138,9 +145,9 @@
                         </ul>
                     </nav>
                 </div>
+                
                 <div class="row wrapper border-bottom white-bg page-heading">
-                    <div class="col-sm-4">
-                        <h2>@yield('title')</h2>
+                    <div class="col-sm-4" style="font-size: 17px; margin-top: 17px">
                         <ol class="breadcrumb">
                             <li>
                                 <a href="/home">Home</a>
@@ -151,6 +158,7 @@
                         </ol>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="wrapper wrapper-content">

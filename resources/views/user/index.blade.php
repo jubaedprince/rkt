@@ -30,13 +30,13 @@
                                 <td>@if($user->type == null) viewer @else {{$user->type}}@endif</td>
                                 <td>
                                     <a href="/users/approve/{{$user->id}}">
-                                        <button type="button" class="btn btn-success btn-sm" aria-label="Ok">
+                                        <button type="button" class="btn btn-success btn-xs" aria-label="Ok">
                                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                                         </button>
                                     </a>
 
                                     <a href="/users/reject/{{$user->id}}">
-                                        <button type="button" class="btn btn-danger btn-sm" aria-label="Remove">
+                                        <button type="button" class="btn btn-danger btn-xs" aria-label="Remove">
                                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         </button>
                                     </a>
@@ -75,7 +75,7 @@
 
                                 <td>
                                     <a href="/users/reject/{{$user->id}}">
-                                        <button type="button" class="btn btn-danger" aria-label="Remove">
+                                        <button type="button" class="btn btn-danger btn-sm" aria-label="Remove">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
                                     </a>
