@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel='shortcut icon' href='/uploads/rkt.png' type='image/png'/ >
+    <link rel='shortcut icon' href='/image/rkt.png' type='image/png'/ >
 
     <!-- Google Font: Open Sans -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">

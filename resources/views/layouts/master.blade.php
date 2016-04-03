@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <script src="/assets/js/jquery-2.1.1.js"></script>    
 
-    <link rel='shortcut icon' href='/uploads/rkt.png' type='image/png'/ >
+    <link rel='shortcut icon' href='/image/rkt.png' type='image/png'/ >
 
     <!-- Google Font: Open Sans -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
@@ -48,7 +48,7 @@
                             <li class="nav-header">
                                 <div class="dropdown profile-element" align="center">
                                     <span>
-                                        <img alt="image" width="28%" class="img-responsive" src="/uploads/rkt.png" />
+                                        <img alt="image" width="28%" class="img-responsive" src="/image/rkt.png" />
                                     </span>
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                         <span class="clear">
