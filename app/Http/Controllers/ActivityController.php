@@ -56,13 +56,17 @@ class ActivityController extends Controller
     public function update(Request $request, $id)
     {
 //        return $request->all();
+        $messages = array(
+            'different' => 'Origin location and destination location cannot be same',
+        );
+
         if ($request->input('activity_type')=="On Day"){
             $this->validate($request, [
                 'cost' => 'required|numeric',
                 'fare' => 'required|numeric',
                 'market_price' => 'required|numeric',
                 'location_id_origin' => 'different:location_id_destination'
-            ]);
+            ], $messages);
 
             $onday = Onday::where("activity_id", '=', $id)->first();
             $onday->type = $request->input('type');

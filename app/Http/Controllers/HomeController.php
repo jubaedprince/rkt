@@ -88,12 +88,16 @@ class HomeController extends Controller {
     }
 
     public function processOndayForm(Request $request){
+
+        $messages = array(
+            'different' => 'Origin location and destination location cannot be same',
+        );
         $this->validate($request, [
             'cost' => 'required|numeric',
             'fare' => 'required|numeric',
             'market_price' => 'required|numeric',
             'location_id_origin' => 'different:location_id_destination'
-        ]);
+        ], $messages);
 
         $onday = new Onday;
         $onday->type = $request->input('type');
