@@ -13,7 +13,7 @@
             </ul>
         </div>
         @endif
-        <div class="form-group col-md-4" id="data_1">
+        <div class="form-group col-md-3" id="data_1">
             <label class="font-noraml">Date</label>
             <div class="input-group date">
                 <span class="input-group-addon">
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="padding: 20px 50px">
             {!! Form::submit('Submit', ['class' => 'btn btn-primary btn-block']) !!}
             {!! Form::close() !!}
         </div>

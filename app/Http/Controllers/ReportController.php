@@ -93,7 +93,12 @@ class ReportController extends Controller {
 
         $date = $this->getDateString($request);
 
-        return view('report.priceComparison', ['market_rate'=>$market_rate, 'fare'=>$fare, 'dates'=>$dates, 'rate'=>$rate, 'date'=>$date]);
+        if ($request->type == "api_call"){
+            return response()->json(['market_rate'=>$market_rate, 'fare'=>$fare, 'dates'=>$dates, 'rate'=>$rate, 'date'=>$date]);
+        }else{
+            return view('report.priceComparison', ['market_rate'=>$market_rate, 'fare'=>$fare, 'dates'=>$dates, 'rate'=>$rate, 'date'=>$date]);
+        }
+        
     }
 
     public function monthlyCostRevenue(){
@@ -127,7 +132,13 @@ class ReportController extends Controller {
 
         $date = $this->getDateString($request);
 
-        return view('report.index', ['trucks'=>$trucks, 'costs'=>$costs, 'revenue'=>$revenue, 'date'=>$date]);
+        if ($request->type == "api_call"){
+            return response()->json(['trucks'=>$trucks, 'costs'=>$costs, 'revenue'=>$revenue, 'date'=>$date]);
+        }else{
+            return view('report.index', ['trucks'=>$trucks, 'costs'=>$costs, 'revenue'=>$revenue, 'date'=>$date]);
+        }
+
+        
     }
 
     public function getDateString($request){

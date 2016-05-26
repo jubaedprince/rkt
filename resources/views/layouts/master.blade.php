@@ -66,8 +66,14 @@
                             </li>
                             <li class="{{ Request::is('home') ? 'active' : '' }}">
                                 <a href="/home">
-                                    <i class="fa fa-th-large"></i>
+                                    <i class="fa fa-home"></i>
                                     <span class="nav-label">Home</span>
+                                </a>
+                            </li>
+                            <li class="{{ Request::is('showactivity') ? 'active' : '' }}">
+                                <a href="/showactivity">
+                                    <i class="fa fa-th-large"></i>
+                                    <span class="nav-label">Activity</span>
                                 </a>
                             </li>
                             <li class="{{ Request::is('report/*') ? 'dropdown active' : 'dropdown' }}">
@@ -183,12 +189,18 @@
         <!-- Custom and plugin javascript -->
         <script src="/assets/js/inspinia.js"></script>
         <script src="/assets/js/plugins/pace/pace.min.js"></script>
+        
+        <script src="assets/js/plugins/chartJs/Chart.min.js"></script>
+        <script src="assets/js/demo/chartjs-demo.js"></script>
 
         <!-- Chosen -->
         <script src="/assets/js/plugins/chosen/chosen.jquery.js"></script>
 
         <!-- Data picker -->
         <script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+        
+        
+        
 
         <!-- Page-Level Scripts -->
         <script>

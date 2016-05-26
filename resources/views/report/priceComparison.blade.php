@@ -8,16 +8,16 @@
 </ol>
 @endsection
 
-
 @section('content')
+
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Generate Fare Comparison Report Form</h5>
+                    <h5>Generate Fare Comparison Graph Form</h5>
                 </div>
                 <div class="ibox-content" align="center">
-                    {!! Form::open(array('url' => 'report/price-comparison', 'method' => 'post' , 'class' => 'form-group')) !!}
+                    {!! Form::open(array('url' => 'report/price-comparison', 'method' => 'post' , 'class' => 'form-inline')) !!}
                     @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>
@@ -27,21 +27,21 @@
                         </ul>
                     </div>
                     @endif
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-4">
                         <label class="font-noraml">Select Month</label>
                         <div class="input-group">
                             {!! Form::select('month',['1'=>'January', '2'=>'February', '3'=>'March', '4'=>'April', '5'=>'May', '6'=>'June', '7'=>'July', '8'=>'August', '9'=>'September', '10'=>'October', '11'=>'November', '12'=>'Decembers'], Carbon\Carbon::now()->format('m'), array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
                         </div>
                     </div>
 
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-4">
                         <label class="font-noraml">Select Year</label>
                         <div class="input-group">
                             {!! Form::select('year', ['2014' => '2014', '2015' => '2015', '2016' => '2016'  ],  Carbon\Carbon::now()->format('Y'), array('class' => 'chosen-select' , 'style' => 'width:222px;')) !!}
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="padding: 20px">
                         {!! Form::submit('Submit', ['class' => 'btn btn-primary btn-block']) !!}
                         {!! Form::close() !!}
                     </div>
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>{{$date}} |
@@ -64,7 +64,9 @@
                 </div>
 
                 <div class="ibox-content">
-                    <canvas id="canvas" width="701%" height="444px"></canvas>
+                    <div>
+                        <canvas id="canvas" height="333px" width="935%"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,7 +112,8 @@
             legend : true,
             graphTitle : "RKT Fare and Market Fare Comparison",
             graphTitleFontSize: 18,
-            bezierCurve: false
+            bezierCurve: false,
+            responsive: true
         }
     </script>
 

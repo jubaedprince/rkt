@@ -32,11 +32,18 @@ use Carbon;
 
 class HomeController extends Controller {
     public function showHome(){
+
+        return view('home');
+    }
+    
+    public function showActivity(){
         Session::forget('maintenance');
         $cars = Car::lists('name', 'id')->sort();
         $activities = Activity::orderBy('created_at', 'desc')->take(10)->get();
-        return view('home', ['cars' => $cars, 'activities' => $activities]);
+        return view('activity', ['cars' => $cars, 'activities' => $activities]);
     }
+
+
 
     public function processForm(Request $request){
 

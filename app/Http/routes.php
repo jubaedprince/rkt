@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return redirect('/home');
 });
+
+
+Route::get('/showactivity', [
+        'as' => 'home', 'uses' => 'HomeController@showActivity'
+    ]);
+
 use App\Activity;
 use App\Car;
 use App\Nil;
@@ -102,6 +108,13 @@ Route::get('/status/', function () {
 //    $car->activity->save();
 //    return $car->activity->comment;
 //    dd($car->activity);
+});
+
+Route::group(['prefix' => 'api'], function(){
+    
+    Route::post('report/price-comparison', ['uses' => 'ReportController@processPriceComparison']);
+    Route::post('report/monthly-cost-revenue', ['uses' => 'ReportController@processMonthlyCostRevenue']);
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
